@@ -14,6 +14,7 @@
 #include <opencv/cvaux.hpp>
 #include <sys/time.h>
 #include <limits.h>
+#include <params.h>
 #include "image_computations.h"
 
 typedef struct ElapseTime {

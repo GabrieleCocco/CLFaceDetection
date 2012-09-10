@@ -156,11 +156,11 @@ filterResult(CLWeightedRect* data,
     for(i = 0; i < nclasses; i++)
     { 
         CLWeightedRect r = rrects[i];
-        float s = 1.f/rweights[i];
-        rrects[i].x = (int)MAX(r.x * s, INT_MAX);
-        rrects[i].y = (int)MAX(r.y * s, INT_MAX);
-        rrects[i].width = (int)MAX(r.width * s, INT_MAX);
-        rrects[i].height = (int)MAX(r.height * s, INT_MAX);
+        float s = 1.f/(float)rweights[i];
+        rrects[i].x = (int)MIN(r.x * s, INT_MAX);
+        rrects[i].y = (int)MIN(r.y * s, INT_MAX);
+        rrects[i].width = (int)MIN(r.width * s, INT_MAX);
+        rrects[i].height = (int)MIN(r.height * s, INT_MAX);
         rrects[i].weight = rweights[i];
     }
     
@@ -973,7 +973,7 @@ detectObjectsGPU(IplImage* image,
         // Add to matches
         for(cl_uint i = 0; i < output_window_count; i++) {
             matches[match_count].x = output_windows[i].x;
-            matches[match_count].y = output_windows[i].x;
+            matches[match_count].y = output_windows[i].y;
             matches[match_count].width = scaled_window_width;
             matches[match_count].height = scaled_window_height;
             match_count++;

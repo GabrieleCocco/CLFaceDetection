@@ -108,7 +108,6 @@ void find_faces_rect_opencv ( IplImage* img )
 	for(i=0; i<(faces ? faces->total : 0); i++)
 	{
 		CvRect* r = (CvRect*)cvGetSeqElem( faces, i );
-        
 		pt1.x = r->x;
 		pt2.x = (r->x+r->width);
 		pt1.y = r->y;
@@ -123,12 +122,13 @@ void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data)
 	CvPoint pt1, pt2;
     
     cl_uint match_count;
-    CLWeightedRect* faces = detectObjectsGPU(img, cascade, data, 40, 40, 0, 0, 0, &match_count); //detectObjectsOptimized(img, cascade, data, 40, 40, 0, 0, 2, &match_count);
+    CLWeightedRect* faces = detectObjectsGPU(img, cascade, data, 40, 40, 0, 0, 0, &match_count);
     
     // Disegno un rettangolo per ogni oggetto trovato
 	for(cl_uint i = 0; i< match_count; i++)
 	{
         CLWeightedRect r = faces[i];
+
 		pt1.x = r.x;
 		pt2.x = r.x + r.width;
 		pt1.y = r.y;

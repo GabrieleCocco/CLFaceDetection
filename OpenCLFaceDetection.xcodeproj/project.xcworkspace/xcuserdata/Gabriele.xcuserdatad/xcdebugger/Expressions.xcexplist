@@ -156,6 +156,14 @@
          contextName = "clBgrToGrayscale(unsigned char*, CLEnvironmentData):image_computations.cpp">
       </ContextState>
       <ContextState
+         contextName = "filterResult(CLWeightedRect*, unsigned int, int, float):object_detection.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "data[10]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "compute_integral_image(char*, unsigned int, unsigned int, unsigned int, unsigned int):integral_image.cpp">
       </ContextState>
       <ContextState
