@@ -248,7 +248,7 @@ clBgrToGrayscale(cl_uchar* source,
     cl_int error = CL_SUCCESS;
     
     // Init buffer
-    error = clEnqueueWriteBuffer(data.environment.queue, data.bgr_to_gray_data.buffers[0], CL_TRUE, 0, data.original_data.stride * data.original_data.height, source, 0, NULL, NULL);
+    error = clEnqueueWriteBuffer(data.environment.queue, data.bgr_to_gray_data.buffers[0], CL_FALSE, 0, data.original_data.stride * data.original_data.height, source, 0, NULL, NULL);
     clCheckOrExit(error);
     
     // Run kernel
@@ -274,7 +274,7 @@ clIntegralImage(cl_uchar* source,
     cl_int error = CL_SUCCESS;
     
     // Init buffer
-    error = clEnqueueWriteBuffer(data.environment.queue, data.integral_image_data.buffers[0], CL_TRUE, 0, data.original_data.width * data.original_data.height, source, 0, NULL, NULL);
+    error = clEnqueueWriteBuffer(data.environment.queue, data.integral_image_data.buffers[0], CL_FALSE, 0, data.original_data.width * data.original_data.height, source, 0, NULL, NULL);
     clCheckOrExit(error);
     
     // Run sum rows kernel

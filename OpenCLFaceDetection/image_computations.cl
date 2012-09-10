@@ -1,4 +1,5 @@
-constant float rgb_to_grayscale_coeff[3] = { 0.299, 0.587, 0.114 };
+constant float rgb_to_grayscale_coeff[4] = { 0.299, 0.587, 0.114, 0 };
+constant float4 rgb_to_grayscale_coeff_v = (0.299, 0.587, 0.114, 0);
 
 kernel void bgrToGrayscale(global uchar* src,
                            global uchar* dst,
@@ -6,7 +7,7 @@ kernel void bgrToGrayscale(global uchar* src,
                            uint height,
                            uint stride)
 {
-    int coord = (get_global_id(1) * stride) + (get_global_id(0) * CHANNELS);
+    int coord = (get_global_id(1) * stride) + (get_global_id(0) * 3);
     
     uint temp = (uint)(rgb_to_grayscale_coeff[2] * src[coord] +
                        rgb_to_grayscale_coeff[1] * src[coord + 1] +
@@ -15,6 +16,63 @@ kernel void bgrToGrayscale(global uchar* src,
     
     dst[(get_global_id(1) * width) + get_global_id(0)] = (uchar)temp;
 }
+
+kernel void bgraToGrayscale(global uchar4* src,
+                            global uchar* dst,
+                            uint width,
+                            uint height,
+                            uint stride)
+{
+    int coord = (get_global_id(1) * stride) + (get_global_id(0) * 4);
+    uchar4 data = src[coord];
+    float result1 = data.x * rgb_to_grayscale_coeff_v.x;
+    float result2 = data.y * rgb_to_grayscale_coeff_v.y;
+    float result3 = data.z * rgb_to_grayscale_coeff_v.z;
+    uint result = clamp((uint)(result1 + result2 + result3), (uint)0, (uint)255);
+    dst[(get_global_id(1) * width) + get_global_id(0)] = (uchar)result;
+}
+
+kernel void bgrToGrayscalePerRow(global uchar3* src,
+                                 global uchar4* dst,
+                                 uint width,
+                                 uint stride)
+{
+    int src_start = (get_global_id(0) * stride);
+    int dst_start = (get_global_id(0) * (width >> 2));
+    uchar3 src_pixel;
+    uchar4 dst_pixels;
+    uint temp;
+    uint dst_index = 0;
+    for(uint i = 0; i < width; i+=4) {
+        src_pixel = src[src_start + i];
+        temp = (uint)(rgb_to_grayscale_coeff[2] * src_pixel.x +
+                      rgb_to_grayscale_coeff[1] * src_pixel.y +
+                      rgb_to_grayscale_coeff[0] * src_pixel.z);
+        dst_pixels.x = (uchar)clamp((uint)temp, (uint)0, (uint)255);
+        
+        src_pixel = src[src_start + i + 1];
+        temp = (uint)(rgb_to_grayscale_coeff[2] * src_pixel.x +
+                      rgb_to_grayscale_coeff[1] * src_pixel.y +
+                      rgb_to_grayscale_coeff[0] * src_pixel.z);
+        dst_pixels.y = (uchar)clamp((uint)temp, (uint)0, (uint)255);
+        
+        src_pixel = src[src_start + i + 2];
+        temp = (uint)(rgb_to_grayscale_coeff[2] * src_pixel.x +
+                      rgb_to_grayscale_coeff[1] * src_pixel.y +
+                      rgb_to_grayscale_coeff[0] * src_pixel.z);
+        dst_pixels.z = (uchar)clamp((uint)temp, (uint)0, (uint)255);
+        
+        src_pixel = src[src_start + i + 3];
+        temp = (uint)(rgb_to_grayscale_coeff[2] * src_pixel.x +
+                      rgb_to_grayscale_coeff[1] * src_pixel.y +
+                      rgb_to_grayscale_coeff[0] * src_pixel.z);
+        dst_pixels.w = (uchar)clamp((uint)temp, (uint)0, (uint)255);
+        
+        dst[dst_start + dst_index] = dst_pixels;
+        dst_index++;
+    }
+}
+
 
 // Input is grayscale 8U image
 // Output is a (width + 1) * (height + 1) 32U image

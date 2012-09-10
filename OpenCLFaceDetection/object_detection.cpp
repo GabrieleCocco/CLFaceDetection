@@ -25,22 +25,11 @@ typedef struct OptimizedRect {
     float weight;
 } OptimizedRect;
 
-typedef struct OptimizedFeature {
-    OptimizedRect rect[MAX_FEATURE_RECT_COUNT];
-} OptimizedFeature;
-
-typedef struct OptimizedClassifier {
-    OptimizedFeature* features;
-    cl_uint count;
-    float alpha[2];
-    float threshold;
-} OptimizedClassifier;
-
-typedef struct OptimizedStage {
-    OptimizedClassifier* classifiers;
-    cl_uint count;
-    float threshold;
-} OptimizedStage;
+typedef struct SubwindowData {
+    cl_uint x;
+    cl_uint y;
+    cl_float variance;
+} SubwindowData;
 
 cl_uint
 areRectSimilar(const CLWeightedRect* r1,
@@ -459,7 +448,6 @@ detectObjects(IplImage* image,
     return matches;
 }
 
-
 CLWeightedRect*
 detectObjectsOptimized(IplImage* image,
                        CvHaarClassifierCascade* casc,
@@ -475,23 +463,33 @@ detectObjectsOptimized(IplImage* image,
     float scale_factor = 1.1;
     //ElapseTime time,time2,time3,time4;
     // Compute greyscale image
-    /* cl_uchar* grayscale_image = clBgrToGrayscale((cl_uchar*)image->imageData, *data);
-     
-     // Compute integral image and squared integral image
-     cl_uint* integral_image;
-     cl_ulong *square_integral_image;
-     clIntegralImage(grayscale_image, *data, &integral_image, &square_integral_image);
-     */
-    // NB validation optional (cl gray vs opencv gray validated)
+    ElapseTime grey_time, integral_time;
+    grey_time.start();
+    //cl_uchar* grayscale_image = clBgrToGrayscale((cl_uchar*)image->imageData, *data);
+    printf("Grayscale time (opencl) : %4.4f ms\n", grey_time.get());
     
-    IplImage* myIplImage = cvCreateImage(cvSize(image->width, image->height), IPL_DEPTH_8U, 1);
+    
+    grey_time.start();
+     IplImage* myIplImage = cvCreateImage(cvSize(image->width, image->height), IPL_DEPTH_8U, 1);
     cvCvtColor(image, myIplImage, CV_BGR2GRAY);
-    CvMat* sum = cvCreateMat(image->height + 1, image->width + 1, CV_32SC1);
-    CvMat* sum_square = cvCreateMat(image->height + 1, image->width + 1, CV_64FC1);
+    printf("Grayscale time (opencv) : %4.4f ms\n", grey_time.get());
     
-    cvIntegral(myIplImage, sum, sum_square);
-    cl_uint* integral_image = (cl_uint*)sum->data.ptr;
-    cl_double* square_integral_image = (cl_double*)sum_square->data.ptr;
+    // Compute integral image and squared integral image
+    integral_time.start();
+    //cl_uint* integral_image;
+    //cl_ulong *square_integral_image;
+    //clIntegralImage(grayscale_image, *data, &integral_image, &square_integral_image);
+    printf("Integral time (opencl) : %4.4f ms\n", integral_time.get());
+    
+    integral_time.start();
+     CvMat* sum = cvCreateMat(image->height + 1, image->width + 1, CV_32SC1);
+     CvMat* sum_square = cvCreateMat(image->height + 1, image->width + 1, CV_64FC1);
+     
+     cvIntegral(myIplImage, sum, sum_square);
+     cl_uint* integral_image = (cl_uint*)sum->data.ptr;
+     cl_double* square_integral_image = (cl_double*)sum_square->data.ptr;
+     printf("Integral time (opencv) : %4.4f ms\n", integral_time.get());
+    
     
     // Calculate number of different scales
     cl_uint scale_count = 0;
@@ -707,6 +705,274 @@ detectObjectsOptimized(IplImage* image,
     // Free optimzed representation
     free(opt_rectangles);
 
+    // Return
+    *final_match_count = match_count;
+    return matches;
+}
+
+
+void
+detectObjectsGPUWork(cl_uint* integral_image,
+                     CvHaarStageClassifier stage,
+                     SubwindowData* win_src,
+                     SubwindowData** p_win_dst,
+                     cl_uint win_src_count,
+                     cl_uint* win_dst_count,
+                     cl_uint scaled_window_area,
+                     cl_float current_scale,
+                     cl_uint integral_image_width)
+{
+    *p_win_dst = (SubwindowData*)malloc(win_src_count * sizeof(SubwindowData));
+    SubwindowData* win_dst = *p_win_dst;
+    *win_dst_count = 0;
+    
+    // Parallelize this
+    for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index++) {
+        SubwindowData subwindow = win_src[win_src_count];
+        
+        // Iterate over classifiers
+        float stage_sum = 0;
+        for(cl_uint classifier_index = 0; classifier_index < stage.count; classifier_index++) {
+            CvHaarClassifier classifier = stage.classifier[classifier_index];
+            
+            //printf(" Classifier %3d\n", classifier_index);
+            
+            // Compute threshold normalized by window vaiance
+            float norm_threshold = *classifier.threshold * subwindow.variance;
+            
+            // Iterate over features (optimized for stump)
+            //for(cl_uint feature_index = 0; feature_index < classifier.count; feature_index++) {
+            CvHaarFeature feature = classifier.haar_feature[0];
+            
+            float rect_sum = 0;
+            
+            // Precalculation on rectangles (loop unroll)
+            float first_rect_area = 0;
+            float sum_rect_area = 0;
+            
+            CLWeightedRect final_rect[3];
+            
+            // Normalize rect size
+            register CvRect* temp_rect = &feature.rect[0].r;
+            register CLWeightedRect* temp_final_rect = &final_rect[0];
+            temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
+            temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
+            temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
+            temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
+            // Normalize rect weight based on window area
+            temp_final_rect->weight = (float)(feature.rect[0].weight) / (float)scaled_window_area;
+            first_rect_area = temp_final_rect->width * temp_final_rect->height;
+            
+            temp_rect = &feature.rect[1].r;
+            temp_final_rect = &final_rect[1];
+            temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
+            temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
+            temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
+            temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
+            // Normalize rect weight based on window area
+            temp_final_rect->weight = (float)(feature.rect[1].weight) / (float)scaled_window_area;
+            sum_rect_area += temp_final_rect->weight * temp_final_rect->width * temp_final_rect->height;
+            
+            if(feature.rect[2].weight != 0) {
+                temp_rect = &feature.rect[2].r;
+                temp_final_rect = &final_rect[2];
+                temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
+                temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
+                temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
+                temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
+                // Normalize rect weight based on window area
+                temp_final_rect->weight = (float)(feature.rect[2].weight) / (float)scaled_window_area;
+                sum_rect_area += temp_final_rect->weight * temp_final_rect->width * temp_final_rect->height;
+            }
+            
+            final_rect[0].weight = (float)(-sum_rect_area/first_rect_area);
+            
+            // Calculation on rectangles (loop unroll)
+            rect_sum += (float)
+            (mats(integral_image,
+                 integral_image_width,
+                 subwindow.x + final_rect[0].x,
+                 subwindow.y + final_rect[0].y,
+                 final_rect[0].width,
+                 final_rect[0].height) * final_rect[0].weight) +
+            (mats(integral_image,
+                  integral_image_width,
+                  subwindow.x + final_rect[1].x,
+                  subwindow.y + final_rect[1].y,
+                  final_rect[1].width,
+                  final_rect[1].height) * final_rect[1].weight);
+            
+            // If rect sum less than stage_sum updated with threshold left_val else right_val
+            stage_sum += classifier.alpha[rect_sum >= norm_threshold];
+        }       
+        
+        // If stage sum less than threshold do nothing
+        if(stage_sum < stage.threshold) {
+        }
+        // Add subwindow to accepted list
+        else {
+            win_dst[*win_dst_count].x = subwindow.x;
+            win_dst[*win_dst_count].y = subwindow.y;
+            win_dst[*win_dst_count].variance = subwindow.variance;
+            (*win_dst_count)++;
+        }
+    }
+}
+    
+CLWeightedRect*
+detectObjectsGPU(IplImage* image,
+              CvHaarClassifierCascade* cascade,
+              CLEnvironmentData* data,
+              cl_uint min_window_width,
+              cl_uint min_window_height,
+              cl_uint max_window_width,
+              cl_uint max_window_height,
+              cl_uint min_neighbors,
+              cl_uint* final_match_count)
+{
+    
+    float scale_factor = 1.1;
+    //ElapseTime time,time2,time3,time4;
+    // Compute greyscale image
+    /* cl_uchar* grayscale_image = clBgrToGrayscale((cl_uchar*)image->imageData, *data);
+     
+     // Compute integral image and squared integral image
+     cl_uint* integral_image;
+     cl_ulong *square_integral_image;
+     clIntegralImage(grayscale_image, *data, &integral_image, &square_integral_image);
+     */
+    // NB validation optional (cl gray vs opencv gray validated)
+    
+    IplImage* myIplImage = cvCreateImage(cvSize(image->width, image->height), IPL_DEPTH_8U, 1);
+    cvCvtColor(image, myIplImage, CV_BGR2GRAY);
+    CvMat* sum = cvCreateMat(image->height + 1, image->width + 1, CV_32SC1);
+    CvMat* sum_square = cvCreateMat(image->height + 1, image->width + 1, CV_64FC1);
+    
+    cvIntegral(myIplImage, sum, sum_square);
+    cl_uint* integral_image = (cl_uint*)sum->data.ptr;
+    cl_double* square_integral_image = (cl_double*)sum_square->data.ptr;
+    
+    // Calculate number of different scales
+    cl_uint scale_count = 0;
+    for(float current_scale = 1;
+        current_scale * cascade->orig_window_size.width < image->width - 10 &&
+        current_scale * cascade->orig_window_size.height < image->height - 10;
+        current_scale *= scale_factor) {
+        
+        scale_count++;
+    }
+    
+    // Vector to store positive matches
+    CLWeightedRect* matches = (CLWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLWeightedRect));
+    cl_uint match_count = 0;
+    
+    // Iterate over scales
+    cl_float current_scale = 1;
+    for(cl_uint scale_index = 0; scale_index < scale_count; scale_index++, current_scale *= scale_factor) {
+        
+        // Compute window y shift
+        const double ystep = fmax((double)2.0, (double)current_scale);
+        
+        // x shift is ystep if current scanning succesfull otherwhise 2 * ystep
+        double xstep = ystep;
+        
+        // Compute scaled window size
+        cl_uint scaled_window_width = (cl_uint)round(cascade->orig_window_size.width * current_scale);
+        cl_uint scaled_window_height = (cl_uint)round(cascade->orig_window_size.height * current_scale);
+        
+        // If the window is smaller than the minimum size continue
+        if(scaled_window_width < min_window_width || scaled_window_height < min_window_height)
+            continue;
+        // If the window is bigger than the maximum size continue
+        if((max_window_width != 0) && (scaled_window_width > max_window_width))
+            continue;
+        if((max_window_height != 0) && (scaled_window_height > max_window_height))
+            continue;
+        
+        // If the window is bigger than the image exit
+        if(scaled_window_width > image->width || scaled_window_height > image->height)
+            break;
+        
+        // Compute scaled window area (using equalized rect, not fully understood)
+        cl_uint equ_rect_x = (cl_uint)round(current_scale);
+        cl_uint equ_rect_y = equ_rect_x;
+        cl_uint equ_rect_width = (cl_uint)round((cascade->orig_window_size.width - 2) * current_scale);
+        cl_uint equ_rect_height = (cl_uint)round((cascade->orig_window_size.height - 2) * current_scale);
+        cl_uint scaled_window_area = equ_rect_width * equ_rect_height;
+        
+        // Set init and end positions of subwindows
+        int start_x = 0, start_y = 0;
+        int end_x = (int)lrint((image->width - scaled_window_width) / ystep);
+        int end_y = (int)lrint((image->height - scaled_window_height) / ystep);
+        
+        // Precompute x and y vars for each subwindow
+        SubwindowData* subwindow_data = (SubwindowData*)malloc((end_y - start_y + 1) * (end_x - start_x + 1) * sizeof(SubwindowData));
+        cl_uint current_subwindow = 0;
+        for(int y_index = start_y; y_index < end_y; y_index++) {
+            for(int x_index = start_x; x_index < end_x; x_index+=2) {
+                // Real position
+                int x = (int)round(x_index * xstep);
+                int y = (int)round(y_index * ystep);
+                //printf("XY = %4d, %4d\n", x, y);
+                
+                // Sum of window pixels normalized by the window size E(x)
+                float mean = (float)mats(integral_image, image->width + 1, x + equ_rect_x, y + equ_rect_y,equ_rect_width, equ_rect_height) / (float)scaled_window_area;
+                // E(xˆ2) - Eˆ2(x)
+                float variance = (float)mats(square_integral_image, image->width + 1, x + equ_rect_x, y + equ_rect_y, equ_rect_width, equ_rect_height);
+                variance = (variance / (float)scaled_window_area) - (mean * mean);
+                // Fix wrong variance
+                if(variance >= 0)
+                    variance = sqrt(variance);
+                else
+                    variance = 1;
+                
+                subwindow_data[current_subwindow].x = x;
+                subwindow_data[current_subwindow].y = y;
+                subwindow_data[current_subwindow].variance = variance;
+                current_subwindow++;
+            }
+        }
+            
+        SubwindowData* input_windows = subwindow_data;
+        SubwindowData* output_windows = NULL;
+        cl_uint input_window_count = current_subwindow;
+        cl_uint output_window_count = 0;
+        
+        // Do not parallelize this
+        for(cl_uint stage_index = 0; stage_index < cascade->count; stage_index++)
+        {
+            CvHaarStageClassifier stage = cascade->stage_classifier[stage_index];
+            // Run stage on GPU for each subwindow
+            //Input: confirmed rectangles (initially is subwindow_data), output: confirmed rectangles (i+1 stage)
+            detectObjectsGPUWork(integral_image, stage, input_windows, &output_windows, input_window_count, &output_window_count, scaled_window_area, current_scale, image->width + 1);
+            
+            free(input_windows);
+            input_windows = output_windows;
+            input_window_count = output_window_count;
+            if(output_window_count == 0)
+                break;
+        }
+        
+        // Add to matches
+        for(cl_uint i = 0; i < output_window_count; i++) {
+            matches[match_count].x = output_windows[i].x;
+            matches[match_count].y = output_windows[i].x;
+            matches[match_count].width = scaled_window_width;
+            matches[match_count].height = scaled_window_height;
+            match_count++;
+        }
+        free(output_windows);
+        free(subwindow_data);
+    }
+    
+    if(min_neighbors != 0)
+        match_count = filterResult(matches, match_count, MAX(min_neighbors, 1), EPS);
+    
+    // Release
+    cvReleaseImage(&myIplImage);
+    cvReleaseMat(&sum);
+    cvReleaseMat(&sum_square);
+    
     // Return
     *final_match_count = match_count;
     return matches;

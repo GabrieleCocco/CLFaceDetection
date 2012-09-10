@@ -12,7 +12,7 @@
 extern "C" {
 #include "CLEnvironment.h"
 }
-#include "tempcv.hpp"
+//#include "tempcv.hpp"
 
 typedef struct CLOriginalImageData {
     cl_uint width;

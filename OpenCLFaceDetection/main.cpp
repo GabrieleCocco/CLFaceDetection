@@ -49,14 +49,14 @@ int main( int argc, char** argv )
     
     ElapseTime t;
     t.start();
-    find_faces_rect_opencv(frame);
+    find_faces_rect_opencv(frame2);
     printf("OpenCV: %8.4f ms\n", t.get());
     
-    cvShowImage("Sample2", frame);
+    cvShowImage("Sample2", frame2);
     
     t.start();
-    find_faces_rect_opencl(frame2, &data);
-    printf("OpenCL: %8.4f ms\n", t.get());
+    find_faces_rect_opencl(frame, &data);
+    printf("Per-stage impl: %8.4f ms\n", t.get());
     
     cvShowImage("Sample3", frame);
     

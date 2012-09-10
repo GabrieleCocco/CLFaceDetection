@@ -14,6 +14,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "detectObjectsGPU(_IplImage*, CvHaarClassifierCascade*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int*):object_detection.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "subwindow_data[6000]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "seq_compute_integral_image(char*, unsigned int, unsigned int, unsigned int, unsigned int):integral_image.cpp">
          <PersistentStrings>
             <PersistentString
@@ -137,6 +145,9 @@
                value = " xrange.end">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "clBgrToGrayscale(unsigned char*, CLEnvironmentData):image_computations.cpp">
       </ContextState>
       <ContextState
          contextName = "compute_integral_image(char*, unsigned int, unsigned int, unsigned int, unsigned int):integral_image.cpp">
