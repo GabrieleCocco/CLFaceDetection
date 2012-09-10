@@ -875,16 +875,13 @@ cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade,
                     CvHidHaarTreeNode* node = classifier->node;
 #ifndef CV_HAAR_USE_SSE
                     double t = node->threshold*variance_norm_factor;
-                    double sum = calc_sum(node->feature.rect[0],p_offset);
-                    sum *= node->feature.rect[0].weight;
+                    double rect0 = calc_sum(node->feature.rect[0],p_offset);
+                    rect0 *= node->feature.rect[0].weight;
                     
-                    double rect2 = calc_sum(node->feature.rect[1],p_offset);
-                    double dw = node->feature.rect[1].weight;
-                    double tte = rect2 * dw;
-                    sum += tte;
+                    double rect1 = calc_sum(node->feature.rect[1],p_offset);
+                    rect1 *= node->feature.rect[1].weight;
+                    double sum = rect1 + rect0;
                     stage_sum += classifier->alpha[sum >= t];
-                    int lk = 0;
-                    lk++;
 #else
                     // ayasin - NHM perf optim. Avoid use of costly flaky jcc
                     __m128d t = _mm_set_sd(node->threshold*variance_norm_factor);
@@ -911,6 +908,8 @@ cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade,
                         sum += calc_sum(node->feature.rect[2],p_offset) * node->feature.rect[2].weight;
                     
                     stage_sum += classifier->alpha[sum >= t];
+
+                    
 #else
                     // ayasin - NHM perf optim. Avoid use of costly flaky jcc
                     __m128d t = _mm_set_sd(node->threshold*variance_norm_factor);

@@ -713,7 +713,11 @@ detectObjectsOptimized(IplImage* image,
 
 void
 detectObjectsGPUWork(cl_uint* integral_image,
+                     OptimizedRect* opt_rectangles,
+                     cl_uint start_rect_index,
+                     cl_uint* end_rect_index,
                      CvHaarStageClassifier stage,
+                     cl_uint stage_index,
                      SubwindowData* win_src,
                      SubwindowData** p_win_dst,
                      cl_uint win_src_count,
@@ -728,15 +732,15 @@ detectObjectsGPUWork(cl_uint* integral_image,
     
     // Parallelize this
     for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index++) {
-        SubwindowData subwindow = win_src[win_src_count];
+        SubwindowData subwindow = win_src[subwindow_index];
+        
+        cl_uint offset = mato(integral_image_width, subwindow.x, subwindow.y);
         
         // Iterate over classifiers
         float stage_sum = 0;
+        cl_uint opt_rect_index = start_rect_index;
         for(cl_uint classifier_index = 0; classifier_index < stage.count; classifier_index++) {
-            CvHaarClassifier classifier = stage.classifier[classifier_index];
-            
-            //printf(" Classifier %3d\n", classifier_index);
-            
+            CvHaarClassifier classifier = stage.classifier[classifier_index];            
             // Compute threshold normalized by window vaiance
             float norm_threshold = *classifier.threshold * subwindow.variance;
             
@@ -744,67 +748,32 @@ detectObjectsGPUWork(cl_uint* integral_image,
             //for(cl_uint feature_index = 0; feature_index < classifier.count; feature_index++) {
             CvHaarFeature feature = classifier.haar_feature[0];
             
-            float rect_sum = 0;
-            
-            // Precalculation on rectangles (loop unroll)
-            float first_rect_area = 0;
-            float sum_rect_area = 0;
-            
-            CLWeightedRect final_rect[3];
-            
-            // Normalize rect size
-            register CvRect* temp_rect = &feature.rect[0].r;
-            register CLWeightedRect* temp_final_rect = &final_rect[0];
-            temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
-            temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
-            temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
-            temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
-            // Normalize rect weight based on window area
-            temp_final_rect->weight = (float)(feature.rect[0].weight) / (float)scaled_window_area;
-            first_rect_area = temp_final_rect->width * temp_final_rect->height;
-            
-            temp_rect = &feature.rect[1].r;
-            temp_final_rect = &final_rect[1];
-            temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
-            temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
-            temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
-            temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
-            // Normalize rect weight based on window area
-            temp_final_rect->weight = (float)(feature.rect[1].weight) / (float)scaled_window_area;
-            sum_rect_area += temp_final_rect->weight * temp_final_rect->width * temp_final_rect->height;
-            
-            if(feature.rect[2].weight != 0) {
-                temp_rect = &feature.rect[2].r;
-                temp_final_rect = &final_rect[2];
-                temp_final_rect->x = (cl_uint)round(temp_rect->x * current_scale);
-                temp_final_rect->y = (cl_uint)round(temp_rect->y * current_scale);
-                temp_final_rect->width = (cl_uint)round(temp_rect->width * current_scale);
-                temp_final_rect->height = (cl_uint)round(temp_rect->height * current_scale);
-                // Normalize rect weight based on window area
-                temp_final_rect->weight = (float)(feature.rect[2].weight) / (float)scaled_window_area;
-                sum_rect_area += temp_final_rect->weight * temp_final_rect->width * temp_final_rect->height;
-            }
-            
-            final_rect[0].weight = (float)(-sum_rect_area/first_rect_area);
-            
             // Calculation on rectangles (loop unroll)
-            rect_sum += (float)
-            (mats(integral_image,
-                 integral_image_width,
-                 subwindow.x + final_rect[0].x,
-                 subwindow.y + final_rect[0].y,
-                 final_rect[0].width,
-                 final_rect[0].height) * final_rect[0].weight) +
-            (mats(integral_image,
-                  integral_image_width,
-                  subwindow.x + final_rect[1].x,
-                  subwindow.y + final_rect[1].y,
-                  final_rect[1].width,
-                  final_rect[1].height) * final_rect[1].weight);
+            cl_float rect_sum =
+            (matsp(opt_rectangles[opt_rect_index].sum_left_top + offset,
+                   opt_rectangles[opt_rect_index].sum_right_top + offset,
+                   opt_rectangles[opt_rect_index].sum_left_bottom + offset,
+                   opt_rectangles[opt_rect_index].sum_right_bottom + offset) * opt_rectangles[opt_rect_index].weight);
+            (opt_rect_index)++;
+            rect_sum +=
+            (matsp(opt_rectangles[opt_rect_index].sum_left_top + offset,
+                   opt_rectangles[opt_rect_index].sum_right_top + offset,
+                   opt_rectangles[opt_rect_index].sum_left_bottom + offset,
+                   opt_rectangles[opt_rect_index].sum_right_bottom + offset) * opt_rectangles[opt_rect_index].weight);
+            (opt_rect_index)++;
+            if(feature.rect[2].weight != 0) {
+                rect_sum +=
+                (matsp(opt_rectangles[opt_rect_index].sum_left_top + offset,
+                       opt_rectangles[opt_rect_index].sum_right_top + offset,
+                       opt_rectangles[opt_rect_index].sum_left_bottom + offset,
+                       opt_rectangles[opt_rect_index].sum_right_bottom + offset) * opt_rectangles[opt_rect_index].weight);
+                (opt_rect_index)++;
+            }
             
             // If rect sum less than stage_sum updated with threshold left_val else right_val
             stage_sum += classifier.alpha[rect_sum >= norm_threshold];
-        }       
+        }
+        *end_rect_index = opt_rect_index;
         
         // If stage sum less than threshold do nothing
         if(stage_sum < stage.threshold) {
@@ -862,6 +831,10 @@ detectObjectsGPU(IplImage* image,
         scale_count++;
     }
     
+    // Precompute feature rect offset in integral image and square integral image into a new cascade
+    cl_uint stages_count = cascade->count;
+    OptimizedRect* opt_rectangles = (OptimizedRect*)malloc(stages_count * MAX_CLASSIFIER_FEATURE_COUNT * MAX_FEATURE_RECT_COUNT * sizeof(OptimizedRect));
+    
     // Vector to store positive matches
     CLWeightedRect* matches = (CLWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLWeightedRect));
     cl_uint match_count = 0;
@@ -905,11 +878,52 @@ detectObjectsGPU(IplImage* image,
         int end_x = (int)lrint((image->width - scaled_window_width) / ystep);
         int end_y = (int)lrint((image->height - scaled_window_height) / ystep);
         
+        
+        // Precompute feature rect offset in integral image and square integral image into a new cascade
+        cl_uint opt_rect_index = 0;
+        for(cl_uint stage_index = 0; stage_index < stages_count; stage_index++) {
+            for(cl_uint classifier_index = 0; classifier_index < cascade->stage_classifier[stage_index].count; classifier_index++) {
+                // Optimized for stump based classifier (otherwise loop over features)
+                CvHaarFeature feature = cascade->stage_classifier[stage_index].classifier[classifier_index].haar_feature[0];
+                
+                // Normalize rect weight based on window area
+                cl_float first_rect_area;
+                cl_uint first_rect_index = opt_rect_index;
+                cl_float sum_rect_area = 0;
+                for(cl_uint i = 0; i < MAX_FEATURE_RECT_COUNT; i++) {
+                    opt_rectangles[opt_rect_index].weight = 0;
+                    if(feature.rect[i].weight != 0) {
+                        register CvRect* temp_rect = &feature.rect[i].r;
+                        register OptimizedRect* opt_rect = &opt_rectangles[opt_rect_index];
+                        register cl_uint rect_x = round(temp_rect->x * current_scale);
+                        register cl_uint rect_y = round(temp_rect->y * current_scale);
+                        register cl_uint rect_width = round(temp_rect->width * current_scale);
+                        register cl_uint rect_height = round(temp_rect->height * current_scale);
+                        register cl_float rect_weight = (feature.rect[i].weight) / (float)scaled_window_area;
+                        opt_rect->weight = rect_weight;
+                        opt_rect->sum_left_top = matp(integral_image, image->width + 1, rect_x, rect_y);
+                        opt_rect->sum_right_top = matp(integral_image, image->width + 1, rect_x + rect_width, rect_y);
+                        opt_rect->sum_left_bottom = matp(integral_image, image->width + 1, rect_x, rect_y + rect_height);
+                        opt_rect->sum_right_bottom = matp(integral_image, image->width + 1, rect_x + rect_width, rect_y + rect_height);
+                        
+                        if(i > 0)
+                            sum_rect_area += rect_weight * rect_width * rect_height;
+                        else
+                            first_rect_area = rect_width * rect_height;
+                        
+                        opt_rect_index++;
+                    }
+                }
+                opt_rectangles[first_rect_index].weight = (-sum_rect_area/first_rect_area);
+            }
+        }
+        // Precompute end
+        
         // Precompute x and y vars for each subwindow
         SubwindowData* subwindow_data = (SubwindowData*)malloc((end_y - start_y + 1) * (end_x - start_x + 1) * sizeof(SubwindowData));
         cl_uint current_subwindow = 0;
         for(int y_index = start_y; y_index < end_y; y_index++) {
-            for(int x_index = start_x; x_index < end_x; x_index+=2) {
+            for(int x_index = start_x; x_index < end_x; x_index++) {
                 // Real position
                 int x = (int)round(x_index * xstep);
                 int y = (int)round(y_index * ystep);
@@ -939,16 +953,19 @@ detectObjectsGPU(IplImage* image,
         cl_uint output_window_count = 0;
         
         // Do not parallelize this
+        cl_uint start_rect_index = 0;
+        cl_uint end_rect_index = 0;
         for(cl_uint stage_index = 0; stage_index < cascade->count; stage_index++)
         {
             CvHaarStageClassifier stage = cascade->stage_classifier[stage_index];
             // Run stage on GPU for each subwindow
             //Input: confirmed rectangles (initially is subwindow_data), output: confirmed rectangles (i+1 stage)
-            detectObjectsGPUWork(integral_image, stage, input_windows, &output_windows, input_window_count, &output_window_count, scaled_window_area, current_scale, image->width + 1);
+            detectObjectsGPUWork(integral_image, opt_rectangles, start_rect_index, &end_rect_index, stage, stage_index, input_windows, &output_windows, input_window_count, &output_window_count, scaled_window_area, current_scale, image->width + 1);
             
             free(input_windows);
             input_windows = output_windows;
             input_window_count = output_window_count;
+            start_rect_index = end_rect_index;
             if(output_window_count == 0)
                 break;
         }
@@ -962,7 +979,6 @@ detectObjectsGPU(IplImage* image,
             match_count++;
         }
         free(output_windows);
-        free(subwindow_data);
     }
     
     if(min_neighbors != 0)
@@ -972,6 +988,7 @@ detectObjectsGPU(IplImage* image,
     cvReleaseImage(&myIplImage);
     cvReleaseMat(&sum);
     cvReleaseMat(&sum_square);
+    free(opt_rectangles);
     
     // Return
     *final_match_count = match_count;
