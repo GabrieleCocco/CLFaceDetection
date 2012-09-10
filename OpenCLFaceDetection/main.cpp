@@ -14,7 +14,7 @@ static CvMemStorage* storage = 0;
 static CvHaarClassifierCascade* cascade = 0;
 
 void find_faces_rect_opencv(IplImage* img);
-void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data);
+void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool, cl_bool);
 
 int main( int argc, char** argv )
 {
@@ -51,15 +51,13 @@ int main( int argc, char** argv )
     t.start();
     find_faces_rect_opencv(frame2);
     printf("OpenCV: %8.4f ms\n", t.get());
+    cvShowImage("Sample OpenCV", frame2);
     
-    cvShowImage("Sample2", frame2);
-    
+    cvCopyImage(frame, frame2);
     t.start();
-    find_faces_rect_opencl(frame, &data);
-    printf("Per-stage impl: %8.4f ms\n", t.get());
-    
-    cvShowImage("Sample3", frame);
-    
+    find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_TRUE);
+    printf("OpenCL (per-stage, optimized): %8.4f ms\n", t.get());
+    cvShowImage("Sample OpenCL (per-stage, optimized)", frame2); 
     
     //detect_faces(frame, &data);
     /*
@@ -117,12 +115,12 @@ void find_faces_rect_opencv ( IplImage* img )
 	}
 }
 
-void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data)
+void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration)
 {
 	CvPoint pt1, pt2;
     
     cl_uint match_count;
-    CLWeightedRect* faces = detectObjectsGPU(img, cascade, data, 40, 40, 0, 0, 0, &match_count);
+    CLWeightedRect* faces = detectObjects(img, cascade, data, 40, 40, 0, 0, 0, &match_count, precompute_rect, per_stage_iteration);
     
     // Disegno un rettangolo per ogni oggetto trovato
 	for(cl_uint i = 0; i< match_count; i++)

@@ -106,6 +106,7 @@
 		E061F7D415E43F4F001BBC93 /* haarcascade_upperbody.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = haarcascade_upperbody.xml; path = OpenCLFaceDetection/haarcascade_upperbody.xml; sourceTree = "<group>"; };
 		E061F7D515E45318001BBC93 /* image_computations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image_computations.cpp; sourceTree = "<group>"; };
 		E061F7D715E45379001BBC93 /* image_computations.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = image_computations.cl; sourceTree = "<group>"; };
+		E0A3BE3615FE3D4D00D8D980 /* object_detection.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = object_detection.cl; sourceTree = "<group>"; };
 		E0AB6AAB15F641FE006E227E /* image_computations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_computations.h; sourceTree = "<group>"; };
 		E0AB6AB215F64390006E227E /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		E0AB6B4615F64A1C006E227E /* CLUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CLUtil.xcodeproj; path = ../CLUtil/CLUtil.xcodeproj; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 				E0279A6215F9AB7D0038D00A /* tempcv.hpp */,
 				E03E7E5615FB8F0500BA1542 /* object_detection.h */,
 				E03E7E5715FB8F2E00BA1542 /* object_detection.cpp */,
+				E0A3BE3615FE3D4D00D8D980 /* object_detection.cl */,
 			);
 			path = OpenCLFaceDetection;
 			sourceTree = "<group>";

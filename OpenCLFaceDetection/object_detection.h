@@ -55,29 +55,8 @@ detectObjects(IplImage* image,
               cl_uint max_window_width,
               cl_uint max_window_height,
               cl_uint min_neighbors,
-              cl_uint* final_match_count);
-
-CLWeightedRect*
-detectObjectsOptimized(IplImage* image,
-                       CvHaarClassifierCascade* cascade,
-                       CLEnvironmentData* data,
-                       cl_uint min_window_width,
-                       cl_uint min_window_height,
-                       cl_uint max_window_width,
-                       cl_uint max_window_height,
-                       cl_uint min_neighbors,
-                       cl_uint* final_match_count);
-
-
-CLWeightedRect*
-detectObjectsGPU(IplImage* image,
-                 CvHaarClassifierCascade* cascade,
-                 CLEnvironmentData* data,
-                 cl_uint min_window_width,
-                 cl_uint min_window_height,
-                 cl_uint max_window_width,
-                 cl_uint max_window_height,
-                 cl_uint min_neighbors,
-                 cl_uint* final_match_count);
+              cl_uint* final_match_count,
+              cl_bool precompute_features,
+              cl_bool per_stage_iteration);
 
 #endif
