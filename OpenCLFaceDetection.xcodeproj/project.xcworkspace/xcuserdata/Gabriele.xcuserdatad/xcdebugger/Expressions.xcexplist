@@ -85,16 +85,16 @@
          contextName = "cvRunHaarClassifierCascadeSum:tempcv.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "calc_sum(node-&gt;feature.rect[1],p_offset) * node-&gt;feature.rect[1].weight">
-            </PersistentString>
-            <PersistentString
                value = "node-&gt;feature.rect[2].weight">
             </PersistentString>
             <PersistentString
-               value = "classifier-&gt;alpha[1]">
+               value = "calc_sum(node-&gt;feature.rect[1],p_offset) * node-&gt;feature.rect[1].weight">
             </PersistentString>
             <PersistentString
                value = "sum &gt;= t">
+            </PersistentString>
+            <PersistentString
+               value = "classifier-&gt;alpha[1]">
             </PersistentString>
             <PersistentString
                value = "cascade-&gt;pq0[pq_offset] - cascade-&gt;pq1[pq_offset] -&#10;    cascade-&gt;pq2[pq_offset] + cascade-&gt;pq3[pq_offset]">
@@ -111,7 +111,7 @@
          contextName = "detect_faces(_IplImage*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int):main.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "feature.rect[rect_index].weight">
+               value = "square_integral_image[2000]">
             </PersistentString>
             <PersistentString
                value = "image-&gt;width * image-&gt;height">
@@ -129,7 +129,7 @@
                value = "(double)matrix_sum(integral_image, image-&gt;width + 1, x + rect_x, y + rect_y, rect_width, rect_height)">
             </PersistentString>
             <PersistentString
-               value = "square_integral_image[2000]">
+               value = "feature.rect[rect_index].weight">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -149,6 +149,9 @@
          <PersistentStrings>
             <PersistentString
                value = " xrange.end">
+            </PersistentString>
+            <PersistentString
+               value = "ystep">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

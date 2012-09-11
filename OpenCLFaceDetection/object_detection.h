@@ -59,4 +59,15 @@ detectObjects(IplImage* image,
               cl_bool precompute_features,
               cl_bool per_stage_iteration);
 
+CLWeightedRect*
+detectObjectsBlock(IplImage* image,
+                   CvHaarClassifierCascade* cascade,
+                   CLEnvironmentData* data,
+                   cl_uint min_window_width,
+                   cl_uint min_window_height,
+                   cl_uint max_window_width,
+                   cl_uint max_window_height,
+                   cl_uint min_neighbors,
+                   cl_uint* final_match_count);
+
 #endif

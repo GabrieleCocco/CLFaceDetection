@@ -758,6 +758,8 @@ cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade,
                 }
                 
                 hidfeature->rect[0].weight = (float)(-sum0/area0);
+                l++;
+                l--;
             } /* l */
         } /* j */
         
@@ -955,7 +957,6 @@ cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade,
                 return -i;
         }
     }
-         
     return 1;
 }
 
@@ -1151,6 +1152,7 @@ namespace cv
                     if( result > 0 )
                         vec->push_back(Rect(x, y, winsize.width, winsize.height));
                     ixstep = result != 0 ? 1 : 2;
+                    result = result;
                     
                     
                 }
@@ -1307,7 +1309,6 @@ cvHaarDetectObjectsForROC( const CvArr* _img,
             else
 #endif
                 cvSetImagesForHaarClassifierCascade( cascade, &sum1, &sqsum1, _tilted, 1. );
-            
             cv::Mat _norm1(&norm1), _mask1(&mask1);
             cv::parallel_for(cv::BlockedRange(0, stripCount),
                              cv::HaarDetectObjects_ScaleImage_Invoker(cascade,

@@ -14,7 +14,7 @@ static CvMemStorage* storage = 0;
 static CvHaarClassifierCascade* cascade = 0;
 
 void find_faces_rect_opencv(IplImage* img);
-void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool, cl_bool);
+void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool, cl_bool, cl_bool);
 
 int main( int argc, char** argv )
 {
@@ -55,10 +55,27 @@ int main( int argc, char** argv )
     
     cvCopyImage(frame, frame2);
     t.start();
-    find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_TRUE);
+    find_faces_rect_opencl(frame2, &data, CL_FALSE, CL_FALSE, CL_FALSE);
+    printf("OpenCL (base): %8.4f ms\n", t.get());
+    cvShowImage("Sample OpenCL (base)", frame2);
+    
+    cvCopyImage(frame, frame2);
+    t.start();
+    find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_FALSE, CL_FALSE);
+    printf("OpenCL (optimized): %8.4f ms\n", t.get());
+    cvShowImage("Sample OpenCL (optimized)", frame2);
+    
+    cvCopyImage(frame, frame2);
+    t.start();
+    find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_TRUE, CL_FALSE);
     printf("OpenCL (per-stage, optimized): %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCL (per-stage, optimized)", frame2); 
     
+    cvCopyImage(frame, frame2);
+    t.start();
+    find_faces_rect_opencl(frame2, &data, CL_FALSE, CL_FALSE, CL_TRUE);
+    printf("OpenCL (block): %8.4f ms\n", t.get());
+    cvShowImage("Sample OpenCL (block)", frame2);
     //detect_faces(frame, &data);
     /*
 	while(1)
@@ -115,12 +132,16 @@ void find_faces_rect_opencv ( IplImage* img )
 	}
 }
 
-void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration)
+void find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration, cl_bool block)
 {
 	CvPoint pt1, pt2;
-    
+    CLWeightedRect* faces;
     cl_uint match_count;
-    CLWeightedRect* faces = detectObjects(img, cascade, data, 40, 40, 0, 0, 0, &match_count, precompute_rect, per_stage_iteration);
+    
+    if(block)
+        faces = detectObjectsBlock(img, cascade, data, 40, 40, 0, 0, 0, &match_count);
+    else
+        faces = detectObjects(img, cascade, data, 40, 40, 0, 0, 0, &match_count, precompute_rect, per_stage_iteration);
     
     // Disegno un rettangolo per ogni oggetto trovato
 	for(cl_uint i = 0; i< match_count; i++)

@@ -7,12 +7,64 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369017481.231813"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "932"
-         endingLineNumber = "932"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
+         landmarkName = "main( int argc, char** argv )"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/object_detection.cpp"
+         timestampString = "369017406.317606"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "977"
+         endingLineNumber = "977"
+         landmarkName = "detectObjectsBlock(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/object_detection.cpp"
+         timestampString = "369017406.317606"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "951"
+         endingLineNumber = "951"
+         landmarkName = "detectObjectsBlock(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369017481.231813"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
+         landmarkName = "find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration, cl_bool block)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/tempcv.cpp"
+         timestampString = "369017382.571922"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1153"
+         endingLineNumber = "1153"
          landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -21,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
+         timestampString = "369017382.571922"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "939"
-         endingLineNumber = "939"
+         startingLineNumber = "1154"
+         endingLineNumber = "1154"
          landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -34,76 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
+         timestampString = "369017382.571922"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "885"
-         endingLineNumber = "885"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "959"
-         endingLineNumber = "959"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "960"
-         endingLineNumber = "960"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1130"
-         endingLineNumber = "1130"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "812"
-         endingLineNumber = "812"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "931"
-         endingLineNumber = "931"
+         startingLineNumber = "1155"
+         endingLineNumber = "1155"
          landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -112,296 +99,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
+         timestampString = "369017481.231813"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "main( int argc, char** argv )"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
+         landmarkName = "find_faces_rect_opencv ( IplImage* img )"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1374"
-         endingLineNumber = "1374"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../../../../usr/local/include/opencv2/core/internal.hpp"
-         timestampString = "368805634.815816"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "210"
-         endingLineNumber = "210"
-         landmarkName = "parallel_for( const BlockedRange&amp; range, const Body&amp; body )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "699"
-         endingLineNumber = "699"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "711"
-         endingLineNumber = "711"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "681"
-         endingLineNumber = "681"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "687"
-         endingLineNumber = "687"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "937"
-         endingLineNumber = "937"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1157"
-         endingLineNumber = "1157"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "614"
-         endingLineNumber = "614"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "865"
-         endingLineNumber = "865"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "595"
-         endingLineNumber = "595">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1137"
-         endingLineNumber = "1137"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "368982777.925664"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "207"
-         endingLineNumber = "207"
-         landmarkName = "filterResult(CLWeightedRect* data, const cl_uint count, const int group_threshold, const cl_float eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1362"
-         endingLineNumber = "1362"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1398"
-         endingLineNumber = "1398"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1404"
-         endingLineNumber = "1404"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1162"
-         endingLineNumber = "1162"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "620"
-         endingLineNumber = "620"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1414"
-         endingLineNumber = "1414"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1445"
-         endingLineNumber = "1445"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982703.855958"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368895866.492606"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369017481.231813"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "147"
          endingLineNumber = "147"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
+         landmarkName = "find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration, cl_bool block)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369017481.231813"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "137"
+         endingLineNumber = "137"
+         landmarkName = "find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -409,64 +138,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
+         timestampString = "369017382.571922"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "247"
-         endingLineNumber = "247"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "252"
-         endingLineNumber = "252"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, vector&lt;int&gt;&amp; weights, int groupThreshold, double eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "257"
-         endingLineNumber = "257"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, vector&lt;int&gt;&amp; rejectLevels, vector&lt;double&gt;&amp; levelWeights, int groupThreshold, double eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982703.855958"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982703.855958"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "191"
-         endingLineNumber = "191"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
+         startingLineNumber = "1152"
+         endingLineNumber = "1152"
+         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -474,402 +151,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008292.626115"
+         timestampString = "369017365.985097"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "739"
-         endingLineNumber = "739"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
+         startingLineNumber = "811"
+         endingLineNumber = "811"
+         landmarkName = "detectObjectsBlock(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
-         landmarkName = "main( int argc, char** argv )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369007209.365228"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
-         landmarkName = "main( int argc, char** argv )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "873"
-         endingLineNumber = "873"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "899"
-         endingLineNumber = "899"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "739"
-         endingLineNumber = "739"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "745"
-         endingLineNumber = "745"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "884"
-         endingLineNumber = "884"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "878"
-         endingLineNumber = "878"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "910"
-         endingLineNumber = "910"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "879"
-         endingLineNumber = "879"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "882"
-         endingLineNumber = "882"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
-         landmarkName = "find_faces_rect_opencl(IplImage* img, CLEnvironmentData* data, cl_bool precompute_rect, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1161"
-         endingLineNumber = "1161"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
+         filePath = "OpenCLFaceDetection/object_detection.cpp"
+         timestampString = "369017365.985097"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "883"
          endingLineNumber = "883"
+         landmarkName = "detectObjectsBlock(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/tempcv.cpp"
+         timestampString = "369017382.571922"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1354"
+         endingLineNumber = "1354"
          landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "760"
-         endingLineNumber = "760"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "716"
-         endingLineNumber = "716"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "705"
-         endingLineNumber = "705"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "754"
-         endingLineNumber = "754"
-         landmarkName = "cvSetImagesForHaarClassifierCascade( CvHaarClassifierCascade* _cascade, const CvArr* _sum, const CvArr* _sqsum, const CvArr* _tilted_sum, double scale )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1271"
-         endingLineNumber = "1271"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1366"
-         endingLineNumber = "1366"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1361"
-         endingLineNumber = "1361"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "906"
-         endingLineNumber = "906"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "908"
-         endingLineNumber = "908"
-         landmarkName = "cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade, CvPoint pt, double&amp; stage_sum, int start_stage )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008292.626115"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "743"
-         endingLineNumber = "743"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008292.626115"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "738"
-         endingLineNumber = "738"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "368981909.016684"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
-         landmarkName = "filterResult(CLWeightedRect* data, const cl_uint count, const int group_threshold, const cl_float eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368981925.641955"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "162"
-         endingLineNumber = "162"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982703.855958"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "176"
-         endingLineNumber = "176"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "368982449.990998"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
-         landmarkName = "filterResult(CLWeightedRect* data, const cl_uint count, const int group_threshold, const cl_float eps)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/tempcv.cpp"
-         timestampString = "368982793.762693"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
-         landmarkName = "AgroupRectangles(vector&lt;cv::Rect&gt;&amp; rectList, int groupThreshold, double eps, vector&lt;int&gt;* weights, vector&lt;double&gt;* levelWeights)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
@@ -877,220 +190,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
+         timestampString = "369017481.231813"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
-         landmarkName = "find_faces_rect_opencv ( IplImage* img )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
-         landmarkName = "find_faces_rect_opencv ( IplImage* img )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "654"
-         endingLineNumber = "654"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "627"
-         endingLineNumber = "627"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "648"
-         endingLineNumber = "648"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "637"
-         endingLineNumber = "637"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "636"
-         endingLineNumber = "636"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "635"
-         endingLineNumber = "635"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "60"
-         endingLineNumber = "60"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "main( int argc, char** argv )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369008010.817688"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
-         landmarkName = "main( int argc, char** argv )"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008292.626115"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "740"
-         endingLineNumber = "740"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "525"
-         endingLineNumber = "525"
-         landmarkName = "runCascade(const cl_uint* integral_image, const cl_uint integral_image_width, CvHaarClassifierCascade* cascade, OptimizedRect* opt_rectangles, const cl_uint x, const cl_uint y, const cl_uint scaled_window_width, const cl_uint scaled_window_height, const cl_uint scaled_window_area, const cl_float variance, const cl_float current_scale, const cl_bool precompute_features, CLWeightedRect* matches, cl_uint* match_count)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "533"
-         endingLineNumber = "533"
-         landmarkName = "runCascade(const cl_uint* integral_image, const cl_uint integral_image_width, CvHaarClassifierCascade* cascade, OptimizedRect* opt_rectangles, const cl_uint x, const cl_uint y, const cl_uint scaled_window_width, const cl_uint scaled_window_height, const cl_uint scaled_window_area, const cl_float variance, const cl_float current_scale, const cl_bool precompute_features, CLWeightedRect* matches, cl_uint* match_count)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "536"
-         endingLineNumber = "536"
-         landmarkName = "runCascade(const cl_uint* integral_image, const cl_uint integral_image_width, CvHaarClassifierCascade* cascade, OptimizedRect* opt_rectangles, const cl_uint x, const cl_uint y, const cl_uint scaled_window_width, const cl_uint scaled_window_height, const cl_uint scaled_window_area, const cl_float variance, const cl_float current_scale, const cl_bool precompute_features, CLWeightedRect* matches, cl_uint* match_count)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "686"
-         endingLineNumber = "686"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008439.387814"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "544"
-         endingLineNumber = "544"
-         landmarkName = "runCascade(const cl_uint* integral_image, const cl_uint integral_image_width, CvHaarClassifierCascade* cascade, OptimizedRect* opt_rectangles, const cl_uint x, const cl_uint y, const cl_uint scaled_window_width, const cl_uint scaled_window_height, const cl_uint scaled_window_area, const cl_float variance, const cl_float current_scale, const cl_bool precompute_features, CLWeightedRect* matches, cl_uint* match_count)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/object_detection.cpp"
-         timestampString = "369008292.626115"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "706"
-         endingLineNumber = "706"
-         landmarkName = "detectObjects(IplImage* image, CvHaarClassifierCascade* cascade, CLEnvironmentData* data, cl_uint min_window_width, cl_uint min_window_height, cl_uint max_window_width, cl_uint max_window_height, cl_uint min_neighbors, cl_uint* final_match_count, cl_bool precompute_features, cl_bool per_stage_iteration)"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>
