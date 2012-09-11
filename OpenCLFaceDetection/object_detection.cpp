@@ -28,7 +28,8 @@ typedef struct OptimizedRect {
 typedef struct SubwindowData {
     cl_uint x;
     cl_uint y;
-    cl_uint not_used1, not_used2; // Not used but these allows to cast subwindow data to CLWeightedRect
+    cl_uint notused;
+    cl_uint offset;
     cl_float variance;
 } SubwindowData;
 
@@ -365,12 +366,14 @@ precomputeWindows(const cl_uint step,
                   const cl_uint end_x,
                   const cl_uint end_y,
                   const cl_uint scaled_window_area,
-                  SubwindowData** subwindow_data,
+                  SubwindowData** psubwindow_data,
                   cl_uint* subwindow_count)
 {    
     // Precompute x and y vars for each subwindow
-    *subwindow_data = (SubwindowData*)malloc((end_y - start_y + 1) * (end_x - start_x + 1) * sizeof(SubwindowData));
+    *psubwindow_data = (SubwindowData*)malloc((end_y - start_y + 1) * (end_x - start_x + 1) * sizeof(SubwindowData));
+    SubwindowData* subwindow_data = *psubwindow_data;
     cl_uint current_subwindow = 0;
+    
     for(int y_index = start_y; y_index < end_y; y_index++) {
         for(int x_index = start_x; x_index < end_x; x_index++) {
             // Real position
@@ -379,9 +382,11 @@ precomputeWindows(const cl_uint step,
             
             cl_float variance = computeVariance(integral_image, square_integral_image, integral_image_width, equ_rect, x, y, scaled_window_area);
             
-            (*subwindow_data)[current_subwindow].x = x;
-            (*subwindow_data)[current_subwindow].y = y;
-            (*subwindow_data)[current_subwindow].variance = variance;
+            subwindow_data[current_subwindow].x = x;
+            subwindow_data[current_subwindow].y = y;
+            subwindow_data[current_subwindow].variance = variance;
+            subwindow_data[current_subwindow].offset = mato(integral_image_width, x, y);
+            
             current_subwindow++;
         }
     }
@@ -569,15 +574,14 @@ runSubwindow(const cl_uint* integral_image,
     for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index += subwindow_incr) {
         SubwindowData subwindow = win_src[subwindow_index];
         
-        cl_uint offset = mato(integral_image_width, subwindow.x, subwindow.y);
-        
         // Iterate over classifiers
         float stage_sum = 0;
+        
         cl_uint opt_rect_index = start_rect_index;
         for(cl_uint classifier_index = 0; classifier_index < stage->count; classifier_index++) {
             CvHaarClassifier classifier = stage->classifier[classifier_index];
             if(precompute_features)
-                runClassifierWithPrecomputedFeatures(integral_image, &classifier, opt_rectangles, &opt_rect_index, offset, subwindow.variance, &stage_sum);
+                runClassifierWithPrecomputedFeatures(integral_image, &classifier, opt_rectangles, &opt_rect_index, subwindow.offset, subwindow.variance, &stage_sum);
             else
                 runClassifier(integral_image, integral_image_width, &classifier, subwindow.x, subwindow.y, subwindow.variance, current_scale, scaled_window_area, &stage_sum);
         }
@@ -588,6 +592,7 @@ runSubwindow(const cl_uint* integral_image,
             win_dst[*win_dst_count].x = subwindow.x;
             win_dst[*win_dst_count].y = subwindow.y;
             win_dst[*win_dst_count].variance = subwindow.variance;
+            win_dst[*win_dst_count].offset = subwindow.offset;
             (*win_dst_count)++;
             subwindow_incr = 1;
         }
@@ -706,8 +711,9 @@ detectObjects(IplImage* image,
             precomputeWindows(step, integral_image, square_integral_image, image->width + 1,
                               &equ_rect,
                               start_x, start_y, end_x, end_y,
-                              scaled_window_area, &input_windows, &input_window_count);            
+                              scaled_window_area, &input_windows, &input_window_count);
             
+            SubwindowData temp = input_windows[2];
             // Iterate over stages
             cl_uint start_rect_index = 0;
             cl_uint end_rect_index = 0;
