@@ -43,15 +43,16 @@ int main( int argc, char** argv )
     frame2 = cvCreateImage(cvSize(640, 480), tframe->depth, 3);
     cvResize(tframe, frame);
     
-    cvCopyImage(frame, frame2);
-    
     CLEnvironmentData data = initCLEnvironment(frame->width, frame->height, frame->widthStep, 3, 0);
     
-    ElapseTime t;
+    ElapseTime t;;
+    /*
     t.start();
+    cvCopyImage(frame, frame2);
     find_faces_rect_opencv(frame2);
     printf("OpenCV: %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCV", frame2);
+    
     
     cvCopyImage(frame, frame2);
     t.start();
@@ -64,18 +65,19 @@ int main( int argc, char** argv )
     find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_FALSE, CL_FALSE);
     printf("OpenCL (optimized): %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCL (optimized)", frame2);
-    
+    */
     cvCopyImage(frame, frame2);
     t.start();
     find_faces_rect_opencl(frame2, &data, CL_TRUE, CL_TRUE, CL_FALSE);
     printf("OpenCL (per-stage, optimized): %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCL (per-stage, optimized)", frame2); 
-    
+    /*
     cvCopyImage(frame, frame2);
     t.start();
     find_faces_rect_opencl(frame2, &data, CL_FALSE, CL_FALSE, CL_TRUE);
     printf("OpenCL (block): %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCL (block)", frame2);
+                   
     //detect_faces(frame, &data);
     /*
 	while(1)
@@ -117,7 +119,7 @@ void find_faces_rect_opencv ( IplImage* img )
     
 	// Libero la memoria
 	cvClearMemStorage(storage);	// Ci potrebbero essere più oggetti. Quindi li salvo in sequenza
-	CvSeq* faces = cvHaarDetectObjects(img, cascade, storage, 1.1, 0, 0, cvSize(40, 40));
+	CvSeq* faces = cvHaarDetectObjects(img, cascade, storage, 1.1, 2, 0, cvSize(40, 40));
     
     // Disegno un rettangolo per ogni oggetto trovato
 	for(i=0; i<(faces ? faces->total : 0); i++)

@@ -28,6 +28,7 @@ typedef struct OptimizedRect {
 typedef struct SubwindowData {
     cl_uint x;
     cl_uint y;
+    cl_uint not_used1, not_used2; // Not used but these allows to cast subwindow data to CLWeightedRect
     cl_float variance;
 } SubwindowData;
 
@@ -550,6 +551,7 @@ runSubwindow(const cl_uint* integral_image,
              const cl_uint start_rect_index,
              cl_uint* end_rect_index,
              const CvHaarStageClassifier* stage,
+             const cl_uint stage_index,
              const SubwindowData* win_src,
              SubwindowData** p_win_dst,
              const cl_uint win_src_count,
@@ -563,7 +565,8 @@ runSubwindow(const cl_uint* integral_image,
     *win_dst_count = 0;
     
     // Parallelize this
-    for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index++) {
+    cl_uint subwindow_incr = 1;
+    for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index += subwindow_incr) {
         SubwindowData subwindow = win_src[subwindow_index];
         
         cl_uint offset = mato(integral_image_width, subwindow.x, subwindow.y);
@@ -586,11 +589,12 @@ runSubwindow(const cl_uint* integral_image,
             win_dst[*win_dst_count].y = subwindow.y;
             win_dst[*win_dst_count].variance = subwindow.variance;
             (*win_dst_count)++;
+            subwindow_incr = 1;
         }
         // Performance improvement
         // Note that we skip a window (step = 2 instead of 1) if a stage fails, not if the cascade fails (linke in non-per-stage methods)
-        else
-            subwindow_index++;
+        else if(stage_index == 0)
+            subwindow_incr = 2;
     }
 }
 
@@ -714,7 +718,7 @@ detectObjects(IplImage* image,
                 runSubwindow(integral_image, image->width + 1,
                              opt_rectangles,
                              start_rect_index, &end_rect_index,
-                             &stage,
+                             &stage, stage_index,
                              input_windows, &output_windows,
                              input_window_count, &output_window_count,
                              scaled_window_area, current_scale, precompute_features);
