@@ -930,7 +930,14 @@ cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade,
             }
             
 #ifndef CV_HAAR_USE_SSE
+            if(pt.x == 14 && pt.y == 0) {
+                printf("");
+            }
             if( stage_sum < cascade->stage_classifier[i].threshold ) {
+                
+                if(pt.x == 14 && pt.y == 0) {
+                    printf("");
+                }
 #else
                 __m128d i_threshold = _mm_set_sd(cascade->stage_classifier[i].threshold);
             if( _mm_comilt_sd(stage_sum, i_threshold) ) {
@@ -957,6 +964,10 @@ cvRunHaarClassifierCascadeSum( const CvHaarClassifierCascade* _cascade,
                 return -i;
         }
     }
+        
+        if(pt.x == 14 && pt.y == 0) {
+            printf("");
+        }
     return 1;
 }
 
@@ -1126,8 +1137,6 @@ namespace cv
             bool doCannyPruning = p0 != 0;
             int sstep = (int)(sumstep/sizeof(p0[0]));
             
-            int row_count = 0;
-            double av_row_time = 0;
             for( iy = startY; iy < endY; iy++ )
             {
                 //ElapseTime2 row_time;
@@ -1258,6 +1267,7 @@ cvHaarDetectObjectsForROC( const CvArr* _img,
         
         for( factor = 1; ; factor *= scaleFactor )
         {
+            
             CvSize winSize = { cvRound(winSize0.width*factor),
                 cvRound(winSize0.height*factor) };
             CvSize sz = { cvRound( img->cols/factor ), cvRound( img->rows/factor ) };
@@ -1350,6 +1360,8 @@ cvHaarDetectObjectsForROC( const CvArr* _img,
         
         for( ; n_factors-- > 0; factor *= scaleFactor )
         {
+            if(factor > 15)
+                printf("");
             const double ystep = std::max( 2., factor );
             CvSize winSize = { cvRound( cascade->orig_window_size.width * factor ),
                 cvRound( cascade->orig_window_size.height * factor )};

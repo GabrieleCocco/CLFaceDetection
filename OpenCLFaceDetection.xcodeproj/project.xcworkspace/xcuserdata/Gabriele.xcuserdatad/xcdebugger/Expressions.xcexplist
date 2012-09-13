@@ -56,6 +56,9 @@
             <PersistentString
                value = "((double*)(sqsum-&gt;data.ptr))[2000]">
             </PersistentString>
+            <PersistentString
+               value = "factor">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -76,7 +79,7 @@
          contextName = "detect_faces(_IplImage*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int):main.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "square_integral_image[2000]">
+               value = "feature.rect[rect_index].weight">
             </PersistentString>
             <PersistentString
                value = "image-&gt;width * image-&gt;height">
@@ -94,7 +97,7 @@
                value = "(double)matrix_sum(integral_image, image-&gt;width + 1, x + rect_x, y + rect_y, rect_width, rect_height)">
             </PersistentString>
             <PersistentString
-               value = "feature.rect[rect_index].weight">
+               value = "square_integral_image[2000]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -102,13 +105,10 @@
          contextName = "detectObjects(_IplImage*, CvHaarClassifierCascade*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int*):object_detection.cpp">
       </ContextState>
       <ContextState
-         contextName = "detectObjectsOptimized(_IplImage*, CvHaarClassifierCascade*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int*):object_detection.cpp">
+         contextName = "precomputeWindows(unsigned int, unsigned int const*, double const*, unsigned int, CLRect const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, SubwindowData**, unsigned int*):object_detection.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "classifier.alpha[rect_sum &gt;= norm_threshold]">
-            </PersistentString>
-            <PersistentString
-               value = "rect_weight * rect_width * rect_height">
+               value = "subwindow_data[current_subwindow]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -132,10 +132,37 @@
          contextName = "clBgrToGrayscale(unsigned char*, CLEnvironmentData):image_computations.cpp">
       </ContextState>
       <ContextState
-         contextName = "precomputeWindows(unsigned int, unsigned int const*, double const*, unsigned int, CLRect const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, SubwindowData**, unsigned int*):object_detection.cpp">
+         contextName = "clodDetectObjectsBlock(CLIFImage const*, CvHaarClassifierCascade const*, CLIFEnvironmentData const*, CLODSize, CLODSize, unsigned int):clod.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "subwindow_data[current_subwindow]">
+               value = "integral_image[2114]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "clifGrayscaleIntegral(_IplImage const*, CLIFEnvironmentData*, unsigned int):clif.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "grayscale-&gt;imageData[2000]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "detectObjectsOptimized(_IplImage*, CvHaarClassifierCascade*, CLEnvironmentData*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int*):object_detection.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "classifier.alpha[rect_sum &gt;= norm_threshold]">
+            </PersistentString>
+            <PersistentString
+               value = "rect_weight * rect_width * rect_height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "runSubwindow(unsigned int const*, unsigned int, CLODOptimizedRect const*, unsigned int, unsigned int*, CvHaarStageClassifier const*, unsigned int, CLODSubwindowData const*, CLODSubwindowData**, unsigned int, unsigned int*, unsigned int, float, unsigned int):clod.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "win_src[1]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -146,10 +173,10 @@
                value = "windows[1]">
             </PersistentString>
             <PersistentString
-               value = "input_windows[2]">
+               value = "windows[0]">
             </PersistentString>
             <PersistentString
-               value = "windows[0]">
+               value = "input_windows[2]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -158,6 +185,14 @@
          <PersistentStrings>
             <PersistentString
                value = "kernel_size / 1024">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "clodDetectObjectsBlock(_IplImage const*, CvHaarClassifierCascade const*, CLIFEnvironmentData const*, CvSize, CvSize, unsigned int, unsigned int):clod.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "input_windows[current_subwindow]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -207,6 +242,14 @@
          <PersistentStrings>
             <PersistentString
                value = "win_src[1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "clodDetectObjects(_IplImage const*, CvHaarClassifierCascade const*, CLIFEnvironmentData const*, CvSize, CvSize, unsigned int, unsigned int):clod.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "input_windows[1]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

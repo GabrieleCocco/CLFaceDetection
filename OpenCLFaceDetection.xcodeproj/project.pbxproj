@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E0279A6115F9A36D0038D00A /* tempcv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E0279A5F15F9A36D0038D00A /* tempcv.cpp */; };
-		E03E7E5815FB8F2E00BA1542 /* object_detection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E03E7E5715FB8F2E00BA1542 /* object_detection.cpp */; };
+		E03E7E5815FB8F2E00BA1542 /* clod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E03E7E5715FB8F2E00BA1542 /* clod.cpp */; };
 		E061F79615E422D3001BBC93 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E061F79515E422D3001BBC93 /* main.cpp */; };
 		E061F7B015E42B1B001BBC93 /* libopencv_contrib.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E061F79F15E42B1B001BBC93 /* libopencv_contrib.2.4.2.dylib */; };
 		E061F7B115E42B1B001BBC93 /* libopencv_core.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E061F7A015E42B1B001BBC93 /* libopencv_core.2.4.2.dylib */; };
@@ -26,10 +26,10 @@
 		E061F7BD15E42B1B001BBC93 /* libopencv_ts.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E061F7AC15E42B1B001BBC93 /* libopencv_ts.2.4.2.dylib */; };
 		E061F7BE15E42B1B001BBC93 /* libopencv_video.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E061F7AD15E42B1B001BBC93 /* libopencv_video.2.4.2.dylib */; };
 		E061F7BF15E42B1B001BBC93 /* libopencv_videostab.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E061F7AE15E42B1B001BBC93 /* libopencv_videostab.2.4.2.dylib */; };
-		E061F7D615E45318001BBC93 /* image_computations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E061F7D515E45318001BBC93 /* image_computations.cpp */; };
+		E061F7D615E45318001BBC93 /* clif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E061F7D515E45318001BBC93 /* clif.cpp */; };
 		E0AB6AB315F64390006E227E /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0AB6AB215F64390006E227E /* OpenCL.framework */; };
 		E0AB6B5615F64A62006E227E /* libCLUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0AB6B4E15F64A1C006E227E /* libCLUtil.a */; };
-		E0AB6B7115F6503F006E227E /* image_computations.cl in CopyFiles */ = {isa = PBXBuildFile; fileRef = E061F7D715E45379001BBC93 /* image_computations.cl */; };
+		E0AB6B7115F6503F006E227E /* clif.cl in CopyFiles */ = {isa = PBXBuildFile; fileRef = E061F7D715E45379001BBC93 /* clif.cl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				E0AB6B7115F6503F006E227E /* image_computations.cl in CopyFiles */,
+				E0AB6B7115F6503F006E227E /* clif.cl in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,8 +65,8 @@
 /* Begin PBXFileReference section */
 		E0279A5F15F9A36D0038D00A /* tempcv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tempcv.cpp; sourceTree = "<group>"; };
 		E0279A6215F9AB7D0038D00A /* tempcv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = tempcv.hpp; sourceTree = "<group>"; };
-		E03E7E5615FB8F0500BA1542 /* object_detection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = object_detection.h; sourceTree = "<group>"; };
-		E03E7E5715FB8F2E00BA1542 /* object_detection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object_detection.cpp; sourceTree = "<group>"; };
+		E03E7E5615FB8F0500BA1542 /* clod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clod.h; sourceTree = "<group>"; };
+		E03E7E5715FB8F2E00BA1542 /* clod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clod.cpp; sourceTree = "<group>"; };
 		E061F79115E422D3001BBC93 /* OpenCLFaceDetection */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenCLFaceDetection; sourceTree = BUILT_PRODUCTS_DIR; };
 		E061F79515E422D3001BBC93 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E061F79F15E42B1B001BBC93 /* libopencv_contrib.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_contrib.2.4.2.dylib; path = /usr/local/lib/libopencv_contrib.2.4.2.dylib; sourceTree = "<absolute>"; };
@@ -104,10 +104,10 @@
 		E061F7D215E43F4F001BBC93 /* haarcascade_profileface.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = haarcascade_profileface.xml; path = OpenCLFaceDetection/haarcascade_profileface.xml; sourceTree = "<group>"; };
 		E061F7D315E43F4F001BBC93 /* haarcascade_righteye_2splits.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = haarcascade_righteye_2splits.xml; path = OpenCLFaceDetection/haarcascade_righteye_2splits.xml; sourceTree = "<group>"; };
 		E061F7D415E43F4F001BBC93 /* haarcascade_upperbody.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = haarcascade_upperbody.xml; path = OpenCLFaceDetection/haarcascade_upperbody.xml; sourceTree = "<group>"; };
-		E061F7D515E45318001BBC93 /* image_computations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image_computations.cpp; sourceTree = "<group>"; };
-		E061F7D715E45379001BBC93 /* image_computations.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = image_computations.cl; sourceTree = "<group>"; };
-		E0A3BE3615FE3D4D00D8D980 /* object_detection.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = object_detection.cl; sourceTree = "<group>"; };
-		E0AB6AAB15F641FE006E227E /* image_computations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = image_computations.h; sourceTree = "<group>"; };
+		E061F7D515E45318001BBC93 /* clif.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clif.cpp; sourceTree = "<group>"; };
+		E061F7D715E45379001BBC93 /* clif.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = clif.cl; sourceTree = "<group>"; };
+		E0A3BE3615FE3D4D00D8D980 /* clod.cl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.opencl; path = clod.cl; sourceTree = "<group>"; };
+		E0AB6AAB15F641FE006E227E /* clif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clif.h; sourceTree = "<group>"; };
 		E0AB6AB215F64390006E227E /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		E0AB6B4615F64A1C006E227E /* CLUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CLUtil.xcodeproj; path = ../CLUtil/CLUtil.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,14 +165,14 @@
 			isa = PBXGroup;
 			children = (
 				E061F79515E422D3001BBC93 /* main.cpp */,
-				E061F7D515E45318001BBC93 /* image_computations.cpp */,
-				E061F7D715E45379001BBC93 /* image_computations.cl */,
-				E0AB6AAB15F641FE006E227E /* image_computations.h */,
+				E061F7D515E45318001BBC93 /* clif.cpp */,
+				E061F7D715E45379001BBC93 /* clif.cl */,
+				E0AB6AAB15F641FE006E227E /* clif.h */,
 				E0279A5F15F9A36D0038D00A /* tempcv.cpp */,
 				E0279A6215F9AB7D0038D00A /* tempcv.hpp */,
-				E03E7E5615FB8F0500BA1542 /* object_detection.h */,
-				E03E7E5715FB8F2E00BA1542 /* object_detection.cpp */,
-				E0A3BE3615FE3D4D00D8D980 /* object_detection.cl */,
+				E03E7E5615FB8F0500BA1542 /* clod.h */,
+				E03E7E5715FB8F2E00BA1542 /* clod.cpp */,
+				E0A3BE3615FE3D4D00D8D980 /* clod.cl */,
 			);
 			path = OpenCLFaceDetection;
 			sourceTree = "<group>";
@@ -303,9 +303,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E061F79615E422D3001BBC93 /* main.cpp in Sources */,
-				E061F7D615E45318001BBC93 /* image_computations.cpp in Sources */,
+				E061F7D615E45318001BBC93 /* clif.cpp in Sources */,
 				E0279A6115F9A36D0038D00A /* tempcv.cpp in Sources */,
-				E03E7E5815FB8F2E00BA1542 /* object_detection.cpp in Sources */,
+				E03E7E5815FB8F2E00BA1542 /* clod.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
