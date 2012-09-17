@@ -10,7 +10,7 @@
 
 #define EPS 0.2
 #define MAX_FEATURE_RECT_COUNT 3
-#define MAX_CLASSIFIER_FEATURE_COUNT 200
+#define MAX_STAGE_CLASSIFIER_COUNT 220
 
 #define mato(stride,x,y) (((stride) * (y)) + (x));
 #define matp(matrix,stride,x,y) (matrix + ((stride) * (y)) + (x))
@@ -21,7 +21,10 @@
     (*(lefttop) - *(righttop) - *(leftbottom) + *(rightbottom))
 
 typedef struct CLODOptimizedRect {
-    cl_uint *sum_left_top, *sum_left_bottom, *sum_right_top, *sum_right_bottom;
+    cl_uint* sum_left_top;
+    cl_uint* sum_left_bottom;
+    cl_uint* sum_right_top;
+    cl_uint* sum_right_bottom;
     float weight;
 } CLODOptimizedRect;
 
@@ -31,6 +34,148 @@ typedef struct CLODSubwindowData {
     cl_uint offset;
     cl_float variance;
 } CLODSubwindowData;
+
+/* Data structures for OpenCL kernel 
+ * Kernel can't accept OpenCV definition of CvHaarStageClassifier since it
+ * contains a pointer
+ */
+
+typedef struct KernelOptimizedRect {
+    cl_uint left_top_offset;
+    cl_uint right_top_offset;
+    cl_uint left_bottom_offset;
+    cl_uint right_bottom_offset;
+    float weight;
+} KernelOptimizedRect;
+
+typedef struct KernelClassifier {
+    float alpha[2];
+    KernelOptimizedRect rect[3];
+    cl_float threshold;
+} KernelClassifier;
+
+typedef struct KernelStage {
+    float threshold;
+    KernelClassifier classifier[MAX_STAGE_CLASSIFIER_COUNT];
+    cl_uint count;
+} KernelStage;
+
+typedef struct KernelCascade {
+    KernelStage* stage;
+    cl_uint count;
+} KernelCascade;
+
+/* Functions */
+
+CLODEnvironmentData*
+clodInitEnvironment(const cl_uint device_index)
+{
+    CLODEnvironmentData* data = (CLODEnvironmentData*)malloc(sizeof(CLODEnvironmentData));
+    data->clif = clifInitEnvironment(0);
+        
+    // Get available devices
+    cl_uint platform_device_count;
+    CLDeviceInfo* platform_device_list = clGetDeviceList(&platform_device_count);
+    
+    // Get selected device
+    CLDeviceInfo device = platform_device_list[device_index];
+    
+    // Set up kernel file path and functions
+    const char* kernel_path = "/Users/Gabriele/Desktop/OpenCLFaceDetection/OpenCLFaceDetection/clod.cl";
+    const char* kernel_functions[] = { "runStage" };
+    
+    // Create device environment
+    char build_options[128];
+    sprintf(build_options, "-D MAX_STAGE_CLASSIFIER_COUNT=%d", MAX_STAGE_CLASSIFIER_COUNT);
+    clCreateDeviceEnvironment(&device, 1, kernel_path, kernel_functions, 1, build_options, 0, 0, &(data->environment));
+    
+    // Release
+    for(cl_uint i = 0; i < platform_device_count; i++)
+        clFreeDeviceInfo(&platform_device_list[i]);
+    free(platform_device_list);
+    
+    return data;
+}
+
+void
+clodInitBuffers(CLODEnvironmentData* data,
+                const CvSize* image_size)
+{
+    cl_int error = CL_SUCCESS;
+    
+    // Integral image
+    data->detect_objects_data.buffers[0] =
+    clCreateBuffer(data->environment.context,
+                   CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_ONLY,
+                   (image_size->width + 1) * (image_size->height + 1) * sizeof(cl_uint),
+                   NULL, &error);
+    clCheckOrExit(error);
+    // Input stage
+    data->detect_objects_data.buffers[1] =
+    clCreateBuffer(data->environment.context,
+                   CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_ONLY,
+                   sizeof(KernelStage),
+                   NULL, &error);
+    clCheckOrExit(error);    
+    // Input list of subwindows
+    data->detect_objects_data.buffers[2] =
+    clCreateBuffer(data->environment.context,
+                   CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_WRITE,
+                   ((image_size->width / 2) * (image_size->height / 2)) * sizeof(CLODSubwindowData),
+                   NULL, &error);
+    clCheckOrExit(error);
+    // Output list of subwindows
+    data->detect_objects_data.buffers[3] =
+    clCreateBuffer(data->environment.context,
+                   CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_WRITE,
+                   (image_size->width / 2) * (image_size->height / 2) * sizeof(CLODSubwindowData),
+                   NULL, &error);
+    clCheckOrExit(error);
+    // Output windows count
+    data->detect_objects_data.buffers[4] =
+    clCreateBuffer(data->environment.context,
+                   CL_MEM_ALLOC_HOST_PTR | CL_MEM_READ_WRITE,
+                   sizeof(cl_uint),
+                   NULL, &error);
+    clCheckOrExit(error);
+    
+    cl_uint integral_image_width = image_size->width + 1;
+    // Integral image
+    clSetKernelArg(data->environment.kernels[0], 0, sizeof(cl_mem), &(data->detect_objects_data.buffers[0]));
+    clCheckOrExit(error);
+    // Kernel stage
+    clSetKernelArg(data->environment.kernels[0], 1, sizeof(cl_mem), &(data->detect_objects_data.buffers[1]));
+    clCheckOrExit(error);
+    // Source windows
+    clSetKernelArg(data->environment.kernels[0], 2, sizeof(cl_mem), &(data->detect_objects_data.buffers[2]));
+    clCheckOrExit(error);
+    // Dest windows
+    clSetKernelArg(data->environment.kernels[0], 3, sizeof(cl_mem), &(data->detect_objects_data.buffers[3]));
+    clCheckOrExit(error);
+    // Dest windows count
+    clSetKernelArg(data->environment.kernels[0], 5, sizeof(cl_mem), &(data->detect_objects_data.buffers[4]));
+    clCheckOrExit(error);
+    // Size of integral image
+    clSetKernelArg(data->environment.kernels[0], 8, sizeof(cl_uint), &(integral_image_width));
+    clCheckOrExit(error);
+}
+
+void
+clodReleaseBuffers(CLODEnvironmentData* data)
+{
+    clifReleaseBuffers(data->clif);
+    for(cl_uint i = 0; i < 4; i++)
+        clReleaseMemObject(data->detect_objects_data.buffers[i]);
+}
+
+void
+clodReleaseEnvironment(CLODFEnvironmentData* data)
+{
+    //clEnqueueUnmapMemObject(data.environment.queue, data.dest_image, data.dest_ptr, 0, NULL, NULL);
+    clifReleaseEnvironment(data->clif);
+    free(data->clif);
+    clFreeDeviceEnvironments(&(data->environment), 1, 0);
+}
 
 cl_uint
 areRectSimilar(const CLODWeightedRect* r1,
@@ -213,9 +358,10 @@ filterResult(CLODWeightedRect* data,
 void
 setupImage(const IplImage* src,
            CvMat** sum,
-           CvMat** square_sum)
+           CvMat** square_sum,
+           cl_bool use_opencl)
 {
-    CLIFIntegralResult result = clifGrayscaleIntegral(src, NULL, false);
+    CLIFIntegralResult result = clifGrayscaleIntegral(src, NULL, use_opencl);
     *sum = result.image;
     *square_sum = result.square_image;
 }
@@ -378,6 +524,57 @@ precomputeWindows(const cl_float step,
     *subwindow_count = current_subwindow;
 }
 
+KernelCascade
+precomputeKernelCascade(const CvHaarClassifierCascade* cascade,
+                        const cl_float current_scale,
+                        const cl_uint scaled_window_area,
+                        const cl_uint integral_image_width)
+{
+    KernelCascade kc;
+    kc.count = cascade->count;
+    kc.stage = (KernelStage*)malloc(kc.count * sizeof(KernelStage));
+    for(cl_uint s = 0; s < cascade->count; s++) {
+        kc.stage[s].count = cascade->stage_classifier[s].count;
+        kc.stage[s].threshold = cascade->stage_classifier[s].threshold;
+        
+        for(cl_uint c = 0; c < cascade->stage_classifier[s].count; c++) {
+            kc.stage[s].classifier[c].alpha[0] = cascade->stage_classifier[s].classifier[c].alpha[0];
+            kc.stage[s].classifier[c].alpha[1] = cascade->stage_classifier[s].classifier[c].alpha[1];
+            kc.stage[s].classifier[c].threshold = *cascade->stage_classifier[s].classifier[c].threshold;
+            
+            cl_float first_rect_area;
+            cl_float sum_rect_area = 0;
+            for(cl_uint r = 0; r < MAX_FEATURE_RECT_COUNT; r++) {
+                cl_float original_weight = cascade->stage_classifier[s].classifier[c].haar_feature[0].rect[r].weight;
+                if(original_weight != 0) {
+                    CvRect original_rect = cascade->stage_classifier[s].classifier[c].haar_feature[0].rect[r].r;
+                    
+                    register cl_uint rect_x = round(original_rect.x * current_scale);
+                    register cl_uint rect_y = round(original_rect.y * current_scale);
+                    register cl_uint rect_width = round(original_rect.width * current_scale);
+                    register cl_uint rect_height = round(original_rect.height * current_scale);
+                    register cl_float rect_weight = (original_weight) / (float)scaled_window_area;
+                    
+                    kc.stage[s].classifier[c].rect[r].left_top_offset = mato(integral_image_width, rect_x, rect_y);
+                    kc.stage[s].classifier[c].rect[r].right_top_offset = mato(integral_image_width, rect_x + rect_width, rect_y);
+                    kc.stage[s].classifier[c].rect[r].left_bottom_offset = mato(integral_image_width, rect_x, rect_y + rect_height);
+                    kc.stage[s].classifier[c].rect[r].right_bottom_offset = mato(integral_image_width, rect_x + rect_width, rect_y + rect_height);
+                    kc.stage[s].classifier[c].rect[r].weight = rect_weight;
+                    
+                    if(r > 0)
+                        sum_rect_area += rect_weight * rect_width * rect_height;
+                    else
+                        first_rect_area = rect_width * rect_height;
+                }
+                else
+                    kc.stage[s].classifier[c].rect[r].weight = 0;
+            }
+            kc.stage[s].classifier[c].rect[0].weight = (-sum_rect_area/first_rect_area);
+        }
+    }
+    return kc;
+}
+
 inline void
 runClassifier(const CvMat* integral_image,
               const CvHaarClassifier* classifier,
@@ -471,8 +668,67 @@ runClassifierWithPrecomputedFeatures(const CvHaarClassifier* classifier,
         (*opt_rect_index)++;
     }
     
+    if(offset == ((641 * 182) + 114)) {
+        //printf((char const *)"Rect 114-182: rect_sum = %f\n", rect_sum);
+    }
+    
     // If rect sum less than stage_sum updated with threshold left_val else right_val
     *stage_sum += classifier->alpha[rect_sum >= norm_threshold];
+}
+
+inline void
+runSubwindow(const CvMat* integral_image,
+             const CLODOptimizedRect* opt_rectangles,
+             const cl_uint start_rect_index,
+             cl_uint* end_rect_index,
+             const CvHaarStageClassifier* stage,
+             const cl_uint stage_index,
+             const CLODSubwindowData* win_src,
+             CLODSubwindowData** p_win_dst,
+             const cl_uint win_src_count,
+             cl_uint* win_dst_count,
+             const cl_uint scaled_window_area,
+             const cl_float current_scale,
+             const cl_bool precompute_features)
+{
+    *p_win_dst = (CLODSubwindowData*)malloc(win_src_count * sizeof(CLODSubwindowData));
+    CLODSubwindowData* win_dst = *p_win_dst;
+    *win_dst_count = 0;
+    
+    // Parallelize this
+    cl_uint subwindow_incr = 1;
+    for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index += subwindow_incr) {
+        CLODSubwindowData subwindow = win_src[subwindow_index];
+        CvPoint point = cvPoint(subwindow.x, subwindow.y);
+        
+        // Iterate over classifiers
+        float stage_sum = 0;
+        
+        cl_uint opt_rect_index = start_rect_index;
+        for(cl_uint classifier_index = 0; classifier_index < stage->count; classifier_index++) {
+            CvHaarClassifier classifier = stage->classifier[classifier_index];
+            if(precompute_features)
+                runClassifierWithPrecomputedFeatures(&classifier, opt_rectangles, &opt_rect_index, subwindow.offset, subwindow.variance, &stage_sum);
+            else
+                runClassifier(integral_image, &classifier, &point, subwindow.variance, current_scale, scaled_window_area, &stage_sum);
+        }
+        *end_rect_index = opt_rect_index;
+        
+        subwindow_incr = 1;
+        
+        // Add subwindow to accepted list
+        if(stage_sum >= stage->threshold) {
+            win_dst[*win_dst_count].x = subwindow.x;
+            win_dst[*win_dst_count].y = subwindow.y;
+            win_dst[*win_dst_count].variance = subwindow.variance;
+            win_dst[*win_dst_count].offset = subwindow.offset;
+            (*win_dst_count)++;
+        }
+        else {
+            if(stage_index == 0)
+                subwindow_incr = 2;
+        }
+    }
 }
 
 inline cl_int
@@ -528,219 +784,36 @@ runCascade(const CvMat* integral_image,
     return exit_stage;
 }
 
-inline void
-runSubwindow(const CvMat* integral_image,
-             const CLODOptimizedRect* opt_rectangles,
-             const cl_uint start_rect_index,
-             cl_uint* end_rect_index,
-             const CvHaarStageClassifier* stage,
-             const cl_uint stage_index,
-             const CLODSubwindowData* win_src,
-             CLODSubwindowData** p_win_dst,
-             const cl_uint win_src_count,
-             cl_uint* win_dst_count,
-             const cl_uint scaled_window_area,
-             const cl_float current_scale,
-             const cl_bool precompute_features)
+void
+runKernelStage(const CLODEnvironmentData* data,
+               const cl_uint input_window_count,
+               const cl_uint scaled_window_area,
+               const cl_float current_scale,
+               const cl_uint stage_index,
+               cl_uint* output_window_count)
 {
-    *p_win_dst = (CLODSubwindowData*)malloc(win_src_count * sizeof(CLODSubwindowData));
-    CLODSubwindowData* win_dst = *p_win_dst;
-    *win_dst_count = 0;
+    cl_int error = CL_SUCCESS;
+        
+    // Set source windows count
+    clSetKernelArg(data->environment.kernels[0], 4, sizeof(cl_uint), &(input_window_count));
+    clCheckOrExit(error);
     
-    // Parallelize this
-    cl_uint subwindow_incr = 1;
-    for(cl_uint subwindow_index = 0; subwindow_index < win_src_count; subwindow_index += subwindow_incr) {
-        CLODSubwindowData subwindow = win_src[subwindow_index];
-        CvPoint point = cvPoint(subwindow.x, subwindow.y);
-        
-        // Iterate over classifiers
-        float stage_sum = 0;
-        
-        cl_uint opt_rect_index = start_rect_index;
-        for(cl_uint classifier_index = 0; classifier_index < stage->count; classifier_index++) {
-            CvHaarClassifier classifier = stage->classifier[classifier_index];
-            if(precompute_features)
-                runClassifierWithPrecomputedFeatures(&classifier, opt_rectangles, &opt_rect_index, subwindow.offset, subwindow.variance, &stage_sum);
-            else
-                runClassifier(integral_image, &classifier, &point, subwindow.variance, current_scale, scaled_window_area, &stage_sum);
-        }
-        *end_rect_index = opt_rect_index;
-        
-        subwindow_incr = 1;
-        
-        // Add subwindow to accepted list
-        if(stage_sum >= stage->threshold) {
-            win_dst[*win_dst_count].x = subwindow.x;
-            win_dst[*win_dst_count].y = subwindow.y;
-            win_dst[*win_dst_count].variance = subwindow.variance;
-            win_dst[*win_dst_count].offset = subwindow.offset;
-            (*win_dst_count)++;
-        }
-        else {
-            if(subwindow.x == 16 && subwindow.y == 0) {
-                printf("");
-            }
-            if(stage_index == 0)
-                subwindow_incr = 2;
-        }
-        // Performance improvement
-        // Note that we skip a window (step = 2 instead of 1) if a stage fails, not if the cascade fails (linke in non-per-stage methods)
-    }
+    // Setup kernel sizes (Global size can be not a multiple of 64, set global size as LCM)
+    size_t wavefront_size = 64;
+    size_t global_size = ((input_window_count / wavefront_size) + 1) * wavefront_size;
+    size_t local_size = 1;
+    
+    // Run kernel
+    error = clEnqueueNDRangeKernel(data->environment.queue, data->environment.kernels[0], 1, NULL, &global_size, &local_size, 0, NULL, NULL);
+    clFinish(data->environment.queue);
+    
+    // Read output window count
+    cl_uint* p_output_window_count = (cl_uint*)clEnqueueMapBuffer(data->environment.queue, data->detect_objects_data.buffers[4], CL_TRUE, CL_MAP_READ, 0, sizeof(cl_uint), 0, NULL, NULL, &error);
+    clCheckOrExit(error);
+    *output_window_count = *p_output_window_count;
+    clEnqueueUnmapMemObject(data->environment.queue, data->detect_objects_data.buffers[4], p_output_window_count, 0, NULL, NULL);
+    clCheckOrExit(error);
 }
-
-CLODDetectObjectsResult
-clodDetectObjects(const IplImage* image,
-                  const CvHaarClassifierCascade* cascade,
-                  const CLIFEnvironmentData* data,
-                  const CvSize min_window_size,
-                  const CvSize max_window_size,
-                  const cl_uint min_neighbors,
-                  const clod_flags flags)
-{
-    
-    float scale_factor = 1.1;
-    CLODDetectObjectsResult result;
-    
-    CvSize image_size = cvSize(image->width, image->height);
-    
-    // Setup image
-    CvMat* integral_image, *square_integral_image;
-    setupImage(image, &integral_image, &square_integral_image);
-    
-    // Calculate number of different scales
-    cl_uint scale_count = 0;
-    for(float current_scale = 1;
-        current_scale * cascade->orig_window_size.width < image->width - 10 &&
-        current_scale * cascade->orig_window_size.height < image->height - 10;
-        current_scale *= scale_factor) {
-        scale_count++;
-    }
-    
-    // Precompute feature rect offset in integral image and square integral image into a new cascade
-    CLODOptimizedRect* opt_rectangles = NULL;
-    if(flags & CLOD_PRECOMPUTE_FEATURES)
-        opt_rectangles = (CLODOptimizedRect*)malloc(cascade->count * MAX_CLASSIFIER_FEATURE_COUNT * MAX_FEATURE_RECT_COUNT * sizeof(CLODOptimizedRect));
-    
-    // Vector to store positive matches
-    CLODWeightedRect* matches = (CLODWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLODWeightedRect));
-    cl_uint match_count = 0;
-    
-    // Iterate over scales
-    cl_float current_scale = 1;
-    for(cl_uint scale_index = 0; scale_index < scale_count; scale_index++, current_scale *= scale_factor) {
-        
-        // Setup scale-dependent variables
-        CvSize scaled_window_size;
-        cl_uint scaled_window_area;
-        CvRect equ_rect;
-        CvPoint start_point = cvPoint(0, 0);
-        CvPoint end_point;
-        cl_float step;
-        if(setupScale(current_scale,
-                      &image_size,
-                      &cascade->orig_window_size,
-                      &min_window_size,
-                      &max_window_size,
-                      &equ_rect,
-                      &scaled_window_size,
-                      &scaled_window_area,
-                      &end_point, &step) != CL_SUCCESS) {
-            continue;
-        }
-        
-        // Precompute feature rect offset in integral image and square integral image into a new cascade
-        if(flags & CLOD_PRECOMPUTE_FEATURES)
-            precomputeFeatures(integral_image, scaled_window_area, cascade, current_scale, opt_rectangles);
-        
-        if(!(flags & CLOD_PER_STAGE_ITERATIONS)) {
-            // Iterate over windows
-            cl_uint x_incr = 1;
-            for(int y_index = start_point.y; y_index < end_point.y; y_index++) {
-                for(int x_index = start_point.x; x_index < end_point.x; x_index += x_incr) {
-                    // Real position
-                    CvPoint point = cvPoint((cl_uint)round(x_index * step), (cl_uint)round(y_index * step));
-                    
-                    // Sum of window pixels normalized by the window size E(x)
-                    cl_float variance = computeVariance(integral_image, square_integral_image, &equ_rect, &point, scaled_window_area);
-                    
-                    // Run cascade on point x,y
-                    cl_int exit_stage = runCascade(integral_image,
-                                              cascade,
-                                              opt_rectangles,
-                                              &point,
-                                              &scaled_window_size,
-                                              scaled_window_area,
-                                              variance, current_scale, (flags & CLOD_PRECOMPUTE_FEATURES),
-                                              matches, &match_count);
-                    x_incr = exit_stage != 0 ? 1 : 2;
-                }
-            }
-        }
-        else {
-            // Allocate windows to be computed by successive stages
-            CLODSubwindowData* input_windows = (CLODSubwindowData*)malloc((end_point.y - start_point.y + 1) * (end_point.x - start_point.x + 1) * sizeof(CLODSubwindowData));
-            CLODSubwindowData* output_windows = NULL;
-            cl_uint input_window_count = 0;
-            cl_uint output_window_count = 0;
-            
-            // Precompute windows
-            precomputeWindows(step, integral_image, square_integral_image,
-                              &equ_rect,
-                              &start_point,
-                              &end_point,
-                              scaled_window_area, &input_windows, &input_window_count);
-            
-            // Iterate over stages
-            cl_uint start_rect_index = 0;
-            cl_uint end_rect_index = 0;
-            for(cl_uint stage_index = 0; stage_index < cascade->count; stage_index++)
-            {
-                CvHaarStageClassifier stage = cascade->stage_classifier[stage_index];
-                // Run stage on GPU for each subwindow
-                runSubwindow(integral_image,
-                             opt_rectangles,
-                             start_rect_index, &end_rect_index,
-                             &stage, stage_index,
-                             input_windows, &output_windows,
-                             input_window_count, &output_window_count,
-                             scaled_window_area, current_scale, (flags & CLOD_PRECOMPUTE_FEATURES));
-                
-                free(input_windows);
-                input_windows = output_windows;
-                input_window_count = output_window_count;
-                start_rect_index = end_rect_index;
-                if(output_window_count == 0)
-                    break;
-            }
-            
-            // Add to matches
-            for(cl_uint i = 0; i < output_window_count; i++) {
-                matches[match_count].rect.x = output_windows[i].x;
-                matches[match_count].rect.y = output_windows[i].y;
-                matches[match_count].rect.width = scaled_window_size.width;
-                matches[match_count].rect.height = scaled_window_size.height;
-                match_count++;
-            }
-            free(output_windows);
-        }
-    }
-    
-    // Filter out results
-    if(min_neighbors != 0) 
-        match_count = filterResult(matches, match_count, MAX(min_neighbors, 1), EPS);
-    
-    // Release
-    if((flags & CLOD_PER_STAGE_ITERATIONS))
-        free(opt_rectangles);
-    cvReleaseMat(&integral_image);
-    cvReleaseMat(&square_integral_image);
-    
-    // Return
-    result.matches = matches;
-    result.match_count = match_count;
-    return result;
-}
-
 
 /* Code obtained unfolding function calls. Seems to be more efficient */
 CLODDetectObjectsResult
@@ -757,7 +830,7 @@ clodDetectObjectsBlock(const IplImage* image,
     
     // Setup image
     CvMat* sum, *square_sum;
-    setupImage(image, &sum, &square_sum);
+    setupImage(image, &sum, &square_sum, CL_FALSE);
     cl_uint* integral_image = (cl_uint*)sum->data.ptr;
     cl_double* square_integral_image = (cl_double*)square_sum->data.ptr;
     cl_uint integral_image_width = image->width + 1;
@@ -774,7 +847,7 @@ clodDetectObjectsBlock(const IplImage* image,
     // Precompute feature rect offset in integral image and square integral image into a new cascade
     CLODOptimizedRect* opt_rectangles = NULL;
     if(flags & CLOD_PRECOMPUTE_FEATURES)
-        opt_rectangles = (CLODOptimizedRect*)malloc(cascade->count * MAX_CLASSIFIER_FEATURE_COUNT * MAX_FEATURE_RECT_COUNT * sizeof(CLODOptimizedRect));
+        opt_rectangles = (CLODOptimizedRect*)malloc(cascade->count * MAX_STAGE_CLASSIFIER_COUNT * MAX_FEATURE_RECT_COUNT * sizeof(CLODOptimizedRect));
     
     // Vector to store positive matches
     CLODWeightedRect* matches = (CLODWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLODWeightedRect));
@@ -814,7 +887,7 @@ clodDetectObjectsBlock(const IplImage* image,
         int start_x = 0, start_y = 0;
         int end_x = (int)lrint((image->width - scaled_window_width) / step);
         int end_y = (int)lrint((image->height - scaled_window_height) / step);
-                
+        
         // Precompute feature rect offset in integral image and square integral image into a new cascade
         if(flags & CLOD_PRECOMPUTE_FEATURES) {
             cl_uint opt_rect_index = 0;
@@ -875,7 +948,7 @@ clodDetectObjectsBlock(const IplImage* image,
                         variance = sqrt(variance);
                     else
                         variance = 1;
-
+                    
                     // Run cascade on point x,y
                     cl_uint offset = mato(integral_image_width, x, y);
                     
@@ -933,7 +1006,7 @@ clodDetectObjectsBlock(const IplImage* image,
                     // If exit at first stage increment by 2, else by 1
                     x_incr = exit_stage != 0 ? 1 : 2;
                     
-                    if(exit_stage > 0) { 
+                    if(exit_stage > 0) {
                         CLODWeightedRect* r = &matches[match_count];
                         r->rect.x = x;
                         r->rect.y = y;
@@ -1060,7 +1133,7 @@ clodDetectObjectsBlock(const IplImage* image,
                     // Performance improvement
                     // Note that we skip a window (step = 2 instead of 1) if a stage fails, not if the cascade fails (linke in non-per-stage methods)
                 }
-
+                
                 free(input_windows);
                 input_windows = output_windows;
                 input_window_count = output_window_count;
@@ -1077,7 +1150,7 @@ clodDetectObjectsBlock(const IplImage* image,
                 matches[match_count].rect.height = scaled_window_height;
                 match_count++;
             }
-            free(output_windows);            
+            free(output_windows);
         }
     }
     
@@ -1086,7 +1159,7 @@ clodDetectObjectsBlock(const IplImage* image,
         match_count = filterResult(matches, match_count, MAX(min_neighbors, 1), EPS);
     
     // Release
-    if(flags & CLOD_PRECOMPUTE_FEATURES) 
+    if(flags & CLOD_PRECOMPUTE_FEATURES)
         free(opt_rectangles);
     cvReleaseMat(&sum);
     cvReleaseMat(&square_sum);
@@ -1094,5 +1167,332 @@ clodDetectObjectsBlock(const IplImage* image,
     // Return
     result.matches = matches;
     result.match_count = match_count;
+    return result;
+}
+
+/* Code to run detection using OpenCL */
+CLODDetectObjectsResult
+clodDetectObjectsOpenCL(const IplImage* image,
+                        const CvHaarClassifierCascade* orig_casc,
+                        const CLODEnvironmentData* clod_data,
+                        const CvSize min_window_size,
+                        const CvSize max_window_size,
+                        const cl_uint min_neighbors)
+{
+    float scale_factor = 1.1;
+    CLODDetectObjectsResult result;
+    cl_int error = CL_SUCCESS;
+    CvSize image_size = cvSize(image->width, image->height);
+    
+    // Setup image
+    CvMat* integral_image, *square_integral_image;
+    setupImage(image, &integral_image, &square_integral_image, CL_FALSE);
+    
+    // Write integral image into buffer
+    error = clEnqueueWriteBuffer(clod_data->environment.queue, clod_data->detect_objects_data.buffers[0], CL_FALSE, 0, integral_image->width * integral_image->height * sizeof(cl_uint), integral_image->data.ptr, 0, NULL, NULL);
+    clCheckOrExit(error);
+    
+    // Calculate number of different scales
+    cl_uint scale_count = 0;
+    for(float current_scale = 1;
+        current_scale * orig_casc->orig_window_size.width < image->width - 10 &&
+        current_scale * orig_casc->orig_window_size.height < image->height - 10;
+        current_scale *= scale_factor) {
+        scale_count++;
+    }
+    
+    // Vector to store positive matches
+    CLODWeightedRect* matches = (CLODWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLODWeightedRect));
+    cl_uint match_count = 0;
+    
+    // Iterate over scales
+    cl_float current_scale = 1;
+    for(cl_uint scale_index = 0; scale_index < scale_count; scale_index++, current_scale *= scale_factor) {
+        // Setup scale-dependent variables
+        CvSize scaled_window_size;
+        cl_uint scaled_window_area;
+        CvRect equ_rect;
+        CvPoint start_point = cvPoint(0, 0);
+        CvPoint end_point;
+        cl_float step;
+        if(setupScale(current_scale,
+                      &image_size,
+                      &orig_casc->orig_window_size,
+                      &min_window_size,
+                      &max_window_size,
+                      &equ_rect,
+                      &scaled_window_size,
+                      &scaled_window_area,
+                      &end_point, &step) != CL_SUCCESS) {
+            continue;
+        }
+        
+        // Precompute feature rect offset in integral image and square integral image into a new cascade
+        KernelCascade kernel_cascade = precomputeKernelCascade(orig_casc, current_scale, scaled_window_area, integral_image->width);
+    
+        // Allocate windows to be computed by successive stages
+        CLODSubwindowData* input_windows = (CLODSubwindowData*)malloc((end_point.y - start_point.y + 1) * (end_point.x - start_point.x + 1) * sizeof(CLODSubwindowData));
+        CLODSubwindowData* output_windows = NULL;
+        cl_uint input_window_count = 0;
+        cl_uint output_window_count = 0;
+        
+        // Precompute windows
+        precomputeWindows(step, integral_image, square_integral_image,
+                          &equ_rect,
+                          &start_point,
+                          &end_point,
+                          scaled_window_area, &input_windows, &input_window_count);
+        
+                
+        // Set input and output window args
+        error = clSetKernelArg(clod_data->environment.kernels[0], 2, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[2]));
+        clCheckOrExit(error);
+        error = clSetKernelArg(clod_data->environment.kernels[0], 3, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[3]));
+        clCheckOrExit(error);
+        
+        // Write input windows
+        error = clEnqueueWriteBuffer(clod_data->environment.queue, clod_data->detect_objects_data.buffers[2], CL_TRUE, 0, input_window_count * sizeof(CLODSubwindowData), input_windows, 0, NULL, NULL);
+        clCheckOrExit(error);
+        
+        // Set scaled window area
+        clSetKernelArg(clod_data->environment.kernels[0], 6, sizeof(cl_uint), &(scaled_window_area));
+        clCheckOrExit(error);
+        // Set current scale
+        clSetKernelArg(clod_data->environment.kernels[0], 7, sizeof(cl_float), &(current_scale));
+        clCheckOrExit(error);
+        
+        // Not useful anymore, written to buffer
+        free(input_windows);
+        input_windows = NULL;
+    
+        cl_uint stage_index = 0;
+        for(stage_index = 0; stage_index < kernel_cascade.count; stage_index++)
+        {
+            KernelStage stage = kernel_cascade.stage[stage_index];
+            
+            // Set kernel stage
+            error = clEnqueueWriteBuffer(clod_data->environment.queue, clod_data->detect_objects_data.buffers[1], CL_TRUE, 0, sizeof(KernelStage), &stage, 0, NULL, NULL);
+            clCheckOrExit(error);
+            
+            // Run kernel
+            runKernelStage(clod_data, input_window_count, scaled_window_area, current_scale, stage_index, &output_window_count);
+            
+            // If no output windows exit
+            if(output_window_count == 0)
+                break;
+            
+            // Set output buffer as the input one
+            // If stage even than the output becomes the input and vice-versa, else restore the original association
+            if(stage_index & 1) {
+                error = clSetKernelArg(clod_data->environment.kernels[0], 2, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[2]));
+                clCheckOrExit(error);
+                error = clSetKernelArg(clod_data->environment.kernels[0], 3, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[3]));
+                clCheckOrExit(error);
+            }
+            else {
+                error = clSetKernelArg(clod_data->environment.kernels[0], 2, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[3]));
+                clCheckOrExit(error);
+                error = clSetKernelArg(clod_data->environment.kernels[0], 3, sizeof(cl_mem), &(clod_data->detect_objects_data.buffers[2]));
+                clCheckOrExit(error);
+            }
+            
+            input_window_count = output_window_count;
+        }
+    
+        cl_uint dst_buffer_index = 3;
+        if(stage_index & 1)
+            dst_buffer_index = 2;
+        
+        output_windows = (CLODSubwindowData*)clEnqueueMapBuffer(clod_data->environment.queue, clod_data->detect_objects_data.buffers[dst_buffer_index], CL_TRUE, CL_MAP_READ, 0, output_window_count * sizeof(CLODSubwindowData), 0, NULL, NULL, &error);
+        clCheckOrExit(error);
+        
+        // Add to matches
+        for(cl_uint i = 0; i < output_window_count; i++) {
+            matches[match_count].rect.x = output_windows[i].x;
+            matches[match_count].rect.y = output_windows[i].y;
+            matches[match_count].rect.width = scaled_window_size.width;
+            matches[match_count].rect.height = scaled_window_size.height;
+            match_count++;
+        }
+        
+        clEnqueueUnmapMemObject(clod_data->environment.queue, clod_data->detect_objects_data.buffers[dst_buffer_index], output_windows, 0, NULL, NULL);
+        clCheckOrExit(error);
+    }
+    
+    // Filter out results
+    if(min_neighbors != 0)
+        match_count = filterResult(matches, match_count, MAX(min_neighbors, 1), EPS);
+    
+    // Release
+    cvReleaseMat(&integral_image);
+    cvReleaseMat(&square_integral_image);
+    
+    // Return
+    result.matches = matches;
+    result.match_count = match_count;
+    return result;
+}
+
+/* Public function. Calls OpenCL or Block depending on arguments */
+CLODDetectObjectsResult
+clodDetectObjects(const IplImage* image,
+                  const CvHaarClassifierCascade* cascade,
+                  const CLODEnvironmentData* clod_data,
+                  const CvSize min_window_size,
+                  const CvSize max_window_size,
+                  const cl_uint min_neighbors,
+                  const clod_flags flags,
+                  const cl_bool use_cl)
+{
+    float scale_factor = 1.1;
+    CLODDetectObjectsResult result;
+    
+    CLIFEnvironmentData* clif_data = clod_data->clif;
+    CvSize image_size = cvSize(image->width, image->height);
+    
+    if(use_cl)
+        return clodDetectObjectsOpenCL(image, cascade, clod_data, min_window_size, max_window_size, min_neighbors);
+    
+    if(flags & CLOD_BLOCK_IMPLEMENTATION)
+        return clodDetectObjectsBlock(image, cascade, clif_data, min_window_size, max_window_size, min_neighbors, flags);
+    
+    // Setup image
+    CvMat* integral_image, *square_integral_image;
+    setupImage(image, &integral_image, &square_integral_image, CL_FALSE);
+    
+    // Calculate number of different scales
+    cl_uint scale_count = 0;
+    for(float current_scale = 1;
+        current_scale * cascade->orig_window_size.width < image->width - 10 &&
+        current_scale * cascade->orig_window_size.height < image->height - 10;
+        current_scale *= scale_factor) {
+        scale_count++;
+    }
+    
+    // Precompute feature rect offset in integral image and square integral image into a new cascade
+    CLODOptimizedRect* opt_rectangles = NULL;
+    if(flags & CLOD_PRECOMPUTE_FEATURES)
+        opt_rectangles = (CLODOptimizedRect*)malloc(cascade->count * MAX_STAGE_CLASSIFIER_COUNT * MAX_FEATURE_RECT_COUNT * sizeof(CLODOptimizedRect));
+    
+    // Vector to store positive matches
+    CLODWeightedRect* matches = (CLODWeightedRect*)malloc(image->width * image->height * scale_count * sizeof(CLODWeightedRect));
+    cl_uint match_count = 0;
+    
+    // Iterate over scales
+    cl_float current_scale = 1;
+    for(cl_uint scale_index = 0; scale_index < scale_count; scale_index++, current_scale *= scale_factor) {
+        
+        // Setup scale-dependent variables
+        CvSize scaled_window_size;
+        cl_uint scaled_window_area;
+        CvRect equ_rect;
+        CvPoint start_point = cvPoint(0, 0);
+        CvPoint end_point;
+        cl_float step;
+        if(setupScale(current_scale,
+                      &image_size,
+                      &cascade->orig_window_size,
+                      &min_window_size,
+                      &max_window_size,
+                      &equ_rect,
+                      &scaled_window_size,
+                      &scaled_window_area,
+                      &end_point, &step) != CL_SUCCESS) {
+            continue;
+        }
+        
+        // Precompute feature rect offset in integral image and square integral image into a new cascade
+        if(flags & CLOD_PRECOMPUTE_FEATURES)
+            precomputeFeatures(integral_image, scaled_window_area, cascade, current_scale, opt_rectangles);
+        
+        if(!(flags & CLOD_PER_STAGE_ITERATIONS)) {
+            // Iterate over windows
+            cl_uint x_incr = 1;
+            for(int y_index = start_point.y; y_index < end_point.y; y_index++) {
+                for(int x_index = start_point.x; x_index < end_point.x; x_index += x_incr) {
+                    // Real position
+                    CvPoint point = cvPoint((cl_uint)round(x_index * step), (cl_uint)round(y_index * step));
+                    
+                    // Sum of window pixels normalized by the window size E(x)
+                    cl_float variance = computeVariance(integral_image, square_integral_image, &equ_rect, &point, scaled_window_area);
+                    
+                    // Run cascade on point x,y
+                    cl_int exit_stage = runCascade(integral_image,
+                                              cascade,
+                                              opt_rectangles,
+                                              &point,
+                                              &scaled_window_size,
+                                              scaled_window_area,
+                                              variance, current_scale, (flags & CLOD_PRECOMPUTE_FEATURES),
+                                              matches, &match_count);
+                    x_incr = exit_stage != 0 ? 1 : 2;
+                }
+            }
+        }
+        else {
+            // Allocate windows to be computed by successive stages
+            CLODSubwindowData* input_windows = (CLODSubwindowData*)malloc((end_point.y - start_point.y + 1) * (end_point.x - start_point.x + 1) * sizeof(CLODSubwindowData));
+            CLODSubwindowData* output_windows = NULL;
+            cl_uint input_window_count = 0;
+            cl_uint output_window_count = 0;
+            
+            // Precompute windows
+            precomputeWindows(step, integral_image, square_integral_image,
+                              &equ_rect,
+                              &start_point,
+                              &end_point,
+                              scaled_window_area, &input_windows, &input_window_count);
+            
+            // Iterate over stages
+            cl_uint start_rect_index = 0;
+            cl_uint end_rect_index = 0;
+            
+            // Write the initial input windows list into buffer            
+            cl_uint stage_index = 0;
+            for(stage_index = 0; stage_index < cascade->count; stage_index++) {
+                CvHaarStageClassifier stage = cascade->stage_classifier[stage_index];
+                // Run stage on GPU for each subwindow
+                runSubwindow(integral_image,
+                             opt_rectangles,
+                             start_rect_index, &end_rect_index,
+                             &stage, stage_index,
+                             input_windows, &output_windows,
+                             input_window_count, &output_window_count,
+                             scaled_window_area, current_scale, (flags & CLOD_PRECOMPUTE_FEATURES));
+                
+                free(input_windows);
+                input_windows = output_windows;
+                input_window_count = output_window_count;
+                start_rect_index = end_rect_index;
+                if(output_window_count == 0)
+                    break;
+            }
+                        
+            // Add to matches
+            for(cl_uint i = 0; i < output_window_count; i++) {
+                matches[match_count].rect.x = output_windows[i].x;
+                matches[match_count].rect.y = output_windows[i].y;
+                matches[match_count].rect.width = scaled_window_size.width;
+                matches[match_count].rect.height = scaled_window_size.height;
+                match_count++;
+            }
+            free(output_windows);
+        }
+    }
+    
+    // Filter out results
+    if(min_neighbors != 0) 
+        match_count = filterResult(matches, match_count, MAX(min_neighbors, 1), EPS);
+    
+    // Release
+    if((flags & CLOD_PER_STAGE_ITERATIONS))
+        free(opt_rectangles);
+    cvReleaseMat(&integral_image);
+    cvReleaseMat(&square_integral_image);
+    
+    // Return
+    result.matches = matches;
+    result.match_count = match_count;
+    printf("\n");
     return result;
 }

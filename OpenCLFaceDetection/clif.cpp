@@ -78,13 +78,8 @@ ifBgrToGrayScale(const cl_uchar* source,
 */
 // Init and release OpenCLIF environment
 CLIFEnvironmentData*
-clifInitEnvironment(const cl_uint image_width,
-                    const cl_uint image_height,
-                    const cl_uint image_stride,
-                    const cl_uint image_channels,
-                    const cl_uint device_index)
+clifInitEnvironment(const cl_uint device_index)
 {
-    cl_int error = CL_SUCCESS;
     CLIFEnvironmentData* data = (CLIFEnvironmentData*)malloc(sizeof(CLIFEnvironmentData));
     
     // Get available devices
@@ -100,9 +95,15 @@ clifInitEnvironment(const cl_uint image_width,
    
     // Create device environment
     char build_options[1024] = { 0 };
-    sprintf(build_options, "-D CHANNELS=%d", image_channels);
     clCreateDeviceEnvironment(&device, 1, kernel_path, kernel_functions, 3, build_options, 0, 0, &(data->environment));
     
+    // Release
+    for(cl_uint i = 0; i < platform_device_count; i++)
+        clFreeDeviceInfo(&platform_device_list[i]);
+    free(platform_device_list);
+    
+    return data;
+}
     /*
      // Create source image
      cl_mem source_image = NULL;
@@ -116,6 +117,14 @@ clifInitEnvironment(const cl_uint image_width,
      dest_image = clCreateImage(environment.context, CLIF_MEM_WRITE_ONLY, &image_format, &image_description, NULL, &error);
      clCheckOrExit(error);
      */
+void
+clifInitBuffers(CLIFEnvironmentData* data,
+                const cl_uint image_width,
+                const cl_uint image_height,
+                const cl_uint image_stride,
+                const cl_uint image_channels)
+{
+    cl_int error = CL_SUCCESS;
     
     // Setup bgr to gray buffers
     data->bgr_to_gray_data.buffers[0] =
@@ -212,23 +221,19 @@ clifInitEnvironment(const cl_uint image_width,
     clCheckOrExit(error);
     clSetKernelArg(data->environment.kernels[2], 5, sizeof(cl_uint), &(image_height));
     clCheckOrExit(error);
-    
-    // Release
-    for(cl_uint i = 0; i < platform_device_count; i++)
-        clFreeDeviceInfo(&platform_device_list[i]);
-    free(platform_device_list);
-    
-    // Return
-    return data;
 }
 
 void
-clifReleaseEnvironment(CLIFEnvironmentData* data) {
-    //clEnqueueUnmapMemObject(data.environment.queue, data.dest_image, data.dest_ptr, 0, NULL, NULL);
+clifReleaseBuffers(CLIFEnvironmentData* data) {
     for(cl_uint i = 0; i < 2; i++)
         clReleaseMemObject(data->bgr_to_gray_data.buffers[i]);
     for(cl_uint i = 0; i < 5; i++)
         clReleaseMemObject(data->integral_image_data.buffers[i]);
+}
+    
+void
+clifReleaseEnvironment(CLIFEnvironmentData* data) {
+    //clEnqueueUnmapMemObject(data.environment.queue, data.dest_image, data.dest_ptr, 0, NULL, NULL);
     clFreeDeviceEnvironments(&(data->environment), 1, 0);
 }
 

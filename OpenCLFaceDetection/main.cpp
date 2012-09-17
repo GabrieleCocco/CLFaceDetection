@@ -14,7 +14,7 @@ static CvMemStorage* storage = 0;
 static CvHaarClassifierCascade* cascade = 0;
 
 void find_faces_rect_opencv(IplImage* img, CvSize min_window_size, CvSize max_window_size);
-void find_faces_rect_opencl(IplImage* img, CLIFEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags, cl_bool);
+void find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags, cl_bool);
 
 int main( int argc, char** argv )
 {
@@ -38,18 +38,20 @@ int main( int argc, char** argv )
 	// Alloco la memoria per elaborare i dati
 	storage = cvCreateMemStorage(0);
 	
-	if(!(capture = cvCaptureFromCAM(wcam)))
+	/*if(!(capture = cvCaptureFromCAM(wcam)))
 	{
 		printf("Impossibile aprire la webcam.\n");
 		return -1;
-	}
+	}*/
     
+    CvSize window_size = cvSize(640, 480);
     frame = cvLoadImage("/Users/Gabriele/Desktop/jobs.jpeg");
-    frame_resized = cvCreateImage(cvSize(640, 480), frame->depth, 3);
-    frame_resized2 = cvCreateImage(cvSize(640, 480), frame->depth, 3);
+    frame_resized = cvCreateImage(window_size, frame->depth, 3);
+    frame_resized2 = cvCreateImage(window_size, frame->depth, 3);
     cvResize(frame, frame_resized);
     
-    CLIFEnvironmentData* data = clifInitEnvironment(frame_resized->width, frame_resized->height, frame_resized->widthStep, frame_resized->nChannels, 0);
+    CLODEnvironmentData* data = clodInitEnvironment(0);
+    clodInitBuffers(data, &window_size);
     
     ElapseTime t;;
     
@@ -61,7 +63,7 @@ int main( int argc, char** argv )
         
     cvCopyImage(frame_resized, frame_resized2);
     t.start();
-    find_faces_rect_opencl(frame_resized2, data, min_window_size, max_window_size, CLOD_PRECOMPUTE_FEATURES, CL_FALSE);
+    find_faces_rect_opencl(frame_resized2, data, min_window_size, max_window_size, CLOD_PER_STAGE_ITERATIONS | CLOD_PRECOMPUTE_FEATURES, CL_FALSE);
     printf("OpenCL (optimized): %8.4f ms\n", t.get());
     cvShowImage("Sample OpenCL (optimized)", frame_resized2);
     cvCopyImage(frame_resized, frame_resized2);
@@ -108,7 +110,8 @@ int main( int argc, char** argv )
 		if( (cvWaitKey(10) & 255) == 27 ) break;
 	}
     */
-    clifReleaseEnvironment(data);
+    clodReleaseBuffers(data);
+    clodReleaseEnvironment(data);
     free(data);
     
 	cvReleaseImage(&frame);
@@ -119,7 +122,7 @@ int main( int argc, char** argv )
 	return 0;
 }
 
-void find_faces_rect_opencv ( IplImage* img, CvSize min_window_size, CvSize max_window_size)
+void find_faces_rect_opencv(IplImage* img, CvSize min_window_size, CvSize max_window_size)
 {
 	CvPoint pt1, pt2;
 	int i;
@@ -140,15 +143,17 @@ void find_faces_rect_opencv ( IplImage* img, CvSize min_window_size, CvSize max_
 	}
 }
 
-void find_faces_rect_opencl(IplImage* img, CLIFEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)
+void find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)
 {
 	CvPoint pt1, pt2;
     CLODDetectObjectsResult result;
     
-    if(block)
-        result = clodDetectObjectsBlock(img, cascade, data, min_window_size, max_window_size, 0, flags);
-    else
-        result = clodDetectObjects(img, cascade, data, min_window_size, max_window_size, 0, flags);
+    if(block) {
+        result = clodDetectObjects(img, cascade, data, min_window_size, max_window_size, 0, flags | CLOD_BLOCK_IMPLEMENTATION, CL_TRUE);
+    }
+    else {
+        result = clodDetectObjects(img, cascade, data, min_window_size, max_window_size, 0, flags, CL_TRUE);
+    }
     
     // Disegno un rettangolo per ogni oggetto trovato
 	for(cl_uint i = 0; i< result.match_count; i++)

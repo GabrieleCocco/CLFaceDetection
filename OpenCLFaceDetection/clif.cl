@@ -126,7 +126,7 @@ kernel void invert(global uchar* bmp,
                    uint height,
                    uint stride)
 {    
-    int coord = (get_global_id(1) * stride) + (get_global_id(0) * CHANNELS);
+    int coord = (get_global_id(1) * stride) + (get_global_id(0) * 3);
     
     uchar pix = bmp[coord];
     temp[coord] = 255 - pix;

@@ -3,6 +3,7 @@
 
 extern "C" {
 #include "CLEnvironment.h"
+#include "CLDevice.h"
 }
 #include <stdio.h>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -40,13 +41,20 @@ typedef struct CLIFGrayscaleResult {
 
 // Init and release OpenCLIF environment
 CLIFEnvironmentData*
-clifInitEnvironment(const cl_uint image_width,
-                    const cl_uint image_height,
-                    const cl_uint image_stride,
-                    const cl_uint image_channels,
-                    const cl_uint device_index);
+clifInitEnvironment(const cl_uint device_index);
+
 void
 clifReleaseEnvironment(CLIFEnvironmentData* data);
+
+void
+clifInitBuffers(CLIFEnvironmentData* data,
+                const cl_uint image_width,
+                const cl_uint image_height,
+                const cl_uint image_stride,
+                const cl_uint image_channels);
+
+void
+clifReleaseBuffers(CLIFEnvironmentData* data);
 
 // OpenCLIF computations
 CLIFGrayscaleResult

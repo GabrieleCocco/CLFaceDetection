@@ -110,6 +110,7 @@
 		E0AB6AAB15F641FE006E227E /* clif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clif.h; sourceTree = "<group>"; };
 		E0AB6AB215F64390006E227E /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		E0AB6B4615F64A1C006E227E /* CLUtil.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CLUtil.xcodeproj; path = ../CLUtil/CLUtil.xcodeproj; sourceTree = "<group>"; };
+		E0E10AD6160766740019E21A /* legacy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = legacy.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +174,7 @@
 				E03E7E5615FB8F0500BA1542 /* clod.h */,
 				E03E7E5715FB8F2E00BA1542 /* clod.cpp */,
 				E0A3BE3615FE3D4D00D8D980 /* clod.cl */,
+				E0E10AD6160766740019E21A /* legacy.cpp */,
 			);
 			path = OpenCLFaceDetection;
 			sourceTree = "<group>";
