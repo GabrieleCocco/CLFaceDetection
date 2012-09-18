@@ -16,7 +16,9 @@
 #define matp(matrix,stride,x,y) (matrix + ((stride) * (y)) + (x))
 #define mate(matrix,stride,x,y) (*(matp(matrix,stride,x,y)))
 #define mats(matrix,stride,x,y,w,h) \
-    (mate(matrix,stride,x,y) - mate(matrix,stride,x+w,y) - mate(matrix,stride,x,y+h) + mate(matrix,stride,x+w,y+h))
+(mate(matrix,stride,x,y) - mate(matrix,stride,x+w,y) - mate(matrix,stride,x,y+h) + mate(matrix,stride,x+w,y+h))
+#define matss(matrix,stride,x,y,w,h) \
+((unsigned long)mate(matrix,stride,x,y) - (unsigned long)mate(matrix,stride,x+w,y) - (unsigned long)mate(matrix,stride,x,y+h) + (unsigned long)mate(matrix,stride,x+w,y+h))
 #define matsp(lefttop,righttop,leftbottom,rightbottom) \
     (*(lefttop) - *(righttop) - *(leftbottom) + *(rightbottom))
 
@@ -427,11 +429,11 @@ computeVariance(const CvMat* integral_image,
                              point->y + equ_rect->y,
                              equ_rect->width, equ_rect->height) / (float)scaled_window_area;
     // E(xˆ2) - Eˆ2(x)
-    float variance = (float)mats(square_integral_image->data.db,
-                                 integral_image->width,
-                                 point->x + equ_rect->x,
-                                 point->y + equ_rect->y,
-                                 equ_rect->width, equ_rect->height);
+    float variance = (float)matss(square_integral_image->data.db,
+                                  integral_image->width,
+                                  point->x + equ_rect->x,
+                                  point->y + equ_rect->y,
+                                  equ_rect->width, equ_rect->height);
     
     variance = (variance / (float)scaled_window_area) - (mean * mean);
     // Fix wrong variance

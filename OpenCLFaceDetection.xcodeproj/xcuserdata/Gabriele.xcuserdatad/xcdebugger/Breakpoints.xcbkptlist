@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "112"
-         endingLineNumber = "112"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "76"
+         endingLineNumber = "76"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "163"
+         endingLineNumber = "163"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
+         startingLineNumber = "165"
+         endingLineNumber = "165"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "905"
-         endingLineNumber = "905"
+         startingLineNumber = "909"
+         endingLineNumber = "909"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "883"
-         endingLineNumber = "883"
+         startingLineNumber = "887"
+         endingLineNumber = "887"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "73"
-         endingLineNumber = "73"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "749"
-         endingLineNumber = "749"
+         startingLineNumber = "753"
+         endingLineNumber = "753"
          landmarkName = "runCascade(const CvMat* integral_image, const CvHaarClassifierCascade* cascade, CLODOptimizedRect* opt_rectangles, const CvPoint* point, const CvSize* scaled_window_size, const cl_uint scaled_window_area, const cl_float variance, const cl_float current_scale, const cl_bool precompute_features, CLODWeightedRect* matches, cl_uint* match_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "865"
-         endingLineNumber = "865"
+         startingLineNumber = "869"
+         endingLineNumber = "869"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -424,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "924"
-         endingLineNumber = "924"
+         startingLineNumber = "928"
+         endingLineNumber = "928"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -437,11 +437,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "916"
-         endingLineNumber = "916"
+         startingLineNumber = "920"
+         endingLineNumber = "920"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -450,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "500"
-         endingLineNumber = "500"
+         startingLineNumber = "504"
+         endingLineNumber = "504"
          landmarkName = "precomputeWindows(const cl_float step, const CvMat* integral_image, const CvMat* square_integral_image, const CvRect* equ_rect, const CvPoint* start_point, const CvPoint* end_point, const cl_uint scaled_window_area, CLODSubwindowData** psubwindow_data, cl_uint* subwindow_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -476,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -489,11 +489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369363078.313621"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "68"
-         endingLineNumber = "68"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -502,11 +502,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369583900.395693"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
+         startingLineNumber = "104"
+         endingLineNumber = "104"
          landmarkName = "clodInitBuffers(CLODEnvironmentData* data, const CvSize* image_size)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -515,11 +515,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "929"
-         endingLineNumber = "929"
+         startingLineNumber = "933"
+         endingLineNumber = "933"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -528,22 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "787"
-         endingLineNumber = "787">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "792"
-         endingLineNumber = "792"
+         startingLineNumber = "791"
+         endingLineNumber = "791"
          landmarkName = "runKernelStage(const CLODEnvironmentData* data, const cl_uint input_window_count, const cl_uint scaled_window_area, const cl_float current_scale, const cl_uint stage_index, cl_uint* output_window_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -552,11 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "795"
-         endingLineNumber = "795"
+         startingLineNumber = "796"
+         endingLineNumber = "796"
          landmarkName = "runKernelStage(const CLODEnvironmentData* data, const cl_uint input_window_count, const cl_uint scaled_window_area, const cl_float current_scale, const cl_uint stage_index, cl_uint* output_window_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -565,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "800"
-         endingLineNumber = "800"
+         startingLineNumber = "799"
+         endingLineNumber = "799"
          landmarkName = "runKernelStage(const CLODEnvironmentData* data, const cl_uint input_window_count, const cl_uint scaled_window_area, const cl_float current_scale, const cl_uint stage_index, cl_uint* output_window_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -578,115 +567,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "948"
-         endingLineNumber = "948"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "946"
-         endingLineNumber = "946"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1051"
-         endingLineNumber = "1051"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "995"
-         endingLineNumber = "995"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1001"
-         endingLineNumber = "1001"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1035"
-         endingLineNumber = "1035"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1016"
-         endingLineNumber = "1016"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1017"
-         endingLineNumber = "1017"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "798"
-         endingLineNumber = "798"
+         startingLineNumber = "804"
+         endingLineNumber = "804"
          landmarkName = "runKernelStage(const CLODEnvironmentData* data, const cl_uint input_window_count, const cl_uint scaled_window_area, const cl_float current_scale, const cl_uint stage_index, cl_uint* output_window_count)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -695,11 +580,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "912"
-         endingLineNumber = "912"
+         startingLineNumber = "952"
+         endingLineNumber = "952"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -708,11 +593,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1033"
-         endingLineNumber = "1033"
+         startingLineNumber = "950"
+         endingLineNumber = "950"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -721,7 +606,150 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1055"
+         endingLineNumber = "1055"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "999"
+         endingLineNumber = "999"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1005"
+         endingLineNumber = "1005"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1039"
+         endingLineNumber = "1039"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1020"
+         endingLineNumber = "1020"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1021"
+         endingLineNumber = "1021"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "802"
+         endingLineNumber = "802"
+         landmarkName = "runKernelStage(const CLODEnvironmentData* data, const cl_uint input_window_count, const cl_uint scaled_window_area, const cl_float current_scale, const cl_uint stage_index, cl_uint* output_window_count)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "916"
+         endingLineNumber = "916"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1037"
+         endingLineNumber = "1037"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "967"
+         endingLineNumber = "967"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "987"
+         endingLineNumber = "987"
+         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "963"
@@ -734,50 +762,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "983"
-         endingLineNumber = "983"
+         startingLineNumber = "1040"
+         endingLineNumber = "1040"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "959"
-         endingLineNumber = "959"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1036"
-         endingLineNumber = "1036"
-         landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
+         startingLineNumber = "165"
+         endingLineNumber = "165"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -786,11 +788,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -799,11 +801,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369583675.726913"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "172"
+         endingLineNumber = "172"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -812,11 +814,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369531438.776713"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -825,11 +827,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369531444.664922"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
          landmarkName = "find_faces_rect_opencl(IplImage* img, CLODEnvironmentData* data, CvSize min_window_size, CvSize max_window_size, clod_flags flags, cl_bool block)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -838,11 +840,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/main.cpp"
-         timestampString = "369532536.320917"
+         timestampString = "369658927.387429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
@@ -851,11 +853,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "936"
-         endingLineNumber = "936"
+         startingLineNumber = "940"
+         endingLineNumber = "940"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -864,11 +866,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "984"
-         endingLineNumber = "984"
+         startingLineNumber = "988"
+         endingLineNumber = "988"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -877,7 +879,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "668"
+         endingLineNumber = "668"
+         landmarkName = "runClassifierWithPrecomputedFeatures(const CvHaarClassifier* classifier, const CLODOptimizedRect* opt_rectangles, cl_uint *opt_rect_index, const cl_uint offset, const cl_float variance, cl_float* stage_sum)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "664"
@@ -890,24 +905,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "660"
-         endingLineNumber = "660"
-         landmarkName = "runClassifierWithPrecomputedFeatures(const CvHaarClassifier* classifier, const CLODOptimizedRect* opt_rectangles, cl_uint *opt_rect_index, const cl_uint offset, const cl_float variance, cl_float* stage_sum)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369616477.787197"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "989"
-         endingLineNumber = "989"
+         startingLineNumber = "993"
+         endingLineNumber = "993"
          landmarkName = "clodDetectObjectsBlock(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLIFEnvironmentData* data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -916,7 +918,59 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1307"
+         endingLineNumber = "1307"
+         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1332"
+         endingLineNumber = "1332"
+         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1357"
+         endingLineNumber = "1357"
+         landmarkName = "clodDetectObjects(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags, const cl_bool use_cl)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1264"
+         endingLineNumber = "1264"
+         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1303"
@@ -929,11 +983,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1328"
-         endingLineNumber = "1328"
+         startingLineNumber = "1314"
+         endingLineNumber = "1314"
          landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -942,24 +996,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1353"
-         endingLineNumber = "1353"
-         landmarkName = "clodDetectObjects(const IplImage* image, const CvHaarClassifierCascade* cascade, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors, const clod_flags flags, const cl_bool use_cl)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1260"
-         endingLineNumber = "1260"
+         startingLineNumber = "1278"
+         endingLineNumber = "1278"
          landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -968,50 +1009,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1299"
-         endingLineNumber = "1299"
-         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1310"
-         endingLineNumber = "1310"
-         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1274"
-         endingLineNumber = "1274"
-         landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
-         landmarkType = "7">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "452"
-         endingLineNumber = "452"
+         startingLineNumber = "456"
+         endingLineNumber = "456"
          landmarkName = "precomputeFeatures(const CvMat* integral_image, const cl_uint scaled_window_area, const CvHaarClassifierCascade* casc, const cl_float current_scale, CLODOptimizedRect* opt_rectangles)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1020,11 +1022,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1323"
-         endingLineNumber = "1323"
+         startingLineNumber = "1327"
+         endingLineNumber = "1327"
          landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1033,11 +1035,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1212"
-         endingLineNumber = "1212"
+         startingLineNumber = "1216"
+         endingLineNumber = "1216"
          landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
          landmarkType = "7">
       </FileBreakpoint>
@@ -1046,12 +1048,90 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OpenCLFaceDetection/clod.cpp"
-         timestampString = "369617683.385882"
+         timestampString = "369657716.846917"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1210"
-         endingLineNumber = "1210"
+         startingLineNumber = "1214"
+         endingLineNumber = "1214"
          landmarkName = "clodDetectObjectsOpenCL(const IplImage* image, const CvHaarClassifierCascade* orig_casc, const CLODEnvironmentData* clod_data, const CvSize min_window_size, const CvSize max_window_size, const cl_uint min_neighbors)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clod.cpp"
+         timestampString = "369657716.846917"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "440"
+         endingLineNumber = "440"
+         landmarkName = "computeVariance(const CvMat* integral_image, const CvMat* square_integral_image, const CvRect* equ_rect, const CvPoint* point, const cl_uint scaled_window_area)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369658927.387429"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "main( int argc, char** argv )"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369658927.387429"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "main( int argc, char** argv )"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clif.cpp"
+         timestampString = "369658956.631043"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "clifInitBuffers(CLIFEnvironmentData* data, const cl_uint image_width, const cl_uint image_height, const cl_uint image_stride, const cl_uint image_channels)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/clif.cpp"
+         timestampString = "369658994.411394"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
+         landmarkName = "clifIntegral(const IplImage* source, CLIFEnvironmentData* data, const cl_bool use_opencl)"
+         landmarkType = "7">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "OpenCLFaceDetection/main.cpp"
+         timestampString = "369659209.461588"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "main( int argc, char** argv )"
          landmarkType = "7">
       </FileBreakpoint>
    </FileBreakpoints>

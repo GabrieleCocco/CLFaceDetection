@@ -60,13 +60,21 @@ kernel void runStage(global uint* integral_image,
             float rect_sum = 0;
             
             // Calculation on rectangles (loop unroll)
-            for(uint ri = 0; ri < 3; ri++) {
-                if(classifier.rect[ri].weight != 0) {
-                    rect_sum += (float)(integral_image[subwindow.offset + classifier.rect[ri].left_top_offset] -
-                                        integral_image[subwindow.offset + classifier.rect[ri].right_top_offset] -
-                                        integral_image[subwindow.offset + classifier.rect[ri].left_bottom_offset] +
-                                        integral_image[subwindow.offset + classifier.rect[ri].right_bottom_offset]) * classifier.rect[ri].weight;
-                }
+            rect_sum += (float)(integral_image[subwindow.offset + classifier.rect[0].left_top_offset] -
+                                integral_image[subwindow.offset + classifier.rect[0].right_top_offset] -
+                                integral_image[subwindow.offset + classifier.rect[0].left_bottom_offset] +
+                                integral_image[subwindow.offset + classifier.rect[0].right_bottom_offset]) * classifier.rect[0].weight;
+            
+            rect_sum += (float)(integral_image[subwindow.offset + classifier.rect[1].left_top_offset] -
+                                integral_image[subwindow.offset + classifier.rect[1].right_top_offset] -
+                                integral_image[subwindow.offset + classifier.rect[1].left_bottom_offset] +
+                                integral_image[subwindow.offset + classifier.rect[1].right_bottom_offset]) * classifier.rect[1].weight;
+            
+            if(classifier.rect[2].weight != 0) {
+                rect_sum += (float)(integral_image[subwindow.offset + classifier.rect[2].left_top_offset] -
+                                    integral_image[subwindow.offset + classifier.rect[2].right_top_offset] -
+                                    integral_image[subwindow.offset + classifier.rect[2].left_bottom_offset] +
+                                    integral_image[subwindow.offset + classifier.rect[2].right_bottom_offset]) * classifier.rect[2].weight;
             }
             
             // If rect sum less than stage_sum updated with threshold left_val else right_val

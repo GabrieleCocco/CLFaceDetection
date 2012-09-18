@@ -51,9 +51,22 @@ int main( int argc, char** argv )
     cvResize(frame, frame_resized);
     
     CLODEnvironmentData* data = clodInitEnvironment(0);
+    clifInitBuffers(data->clif, frame_resized->width, frame_resized->height, frame_resized->widthStep, 3);
     clodInitBuffers(data, &window_size);
     
     ElapseTime t;;
+    
+    /* Test grayscale */    
+    IplImage* grayscale = cvCreateImage(cvSize(frame_resized->width, frame_resized->height), IPL_DEPTH_8U, 1);
+    cvCvtColor(frame_resized, grayscale, CV_BGR2GRAY);
+    
+    CvMat* sim = cvCreateMat(frame_resized->height + 1, frame_resized->width + 1, CV_32SC1);
+    CvMat* sqim = cvCreateMat(frame_resized->height + 1, frame_resized->width + 1, CV_64FC1);
+    cvIntegral(grayscale, sim, sqim);
+    double temp = sqim->data.db[2000];
+    
+    CLIFIntegralResult r = clifIntegral(frame_resized, data->clif, CL_TRUE);
+    cl_ulong temp2 = ((unsigned long*)r.square_image->data.db)[2000];
     
     cvCopyImage(frame_resized, frame_resized2);
     t.start();

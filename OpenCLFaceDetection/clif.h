@@ -64,7 +64,7 @@ clifGrayscale(const IplImage* source,
 
 CLIFIntegralResult
 clifIntegral(const IplImage* source,
-             CLIFEnvironmentData data,
+             CLIFEnvironmentData* data,
              const cl_bool use_opencl);
 
 CLIFIntegralResult

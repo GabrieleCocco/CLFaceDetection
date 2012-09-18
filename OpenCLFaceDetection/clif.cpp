@@ -308,10 +308,10 @@ clifIntegral(const IplImage* source,
     data->integral_image_data.ptr = result;
     
     // Return    
-    ret.image = cvCreateMatHeader(source->height + 1, source->width + 1, CV_32SC1);
-    cvSetData(ret.image, result, source->width + 1);
+    ret.image = cvCreateMat(source->height + 1, source->width + 1, CV_32SC1);
+    cvSetData(ret.image, result, (source->width + 1) * sizeof(cl_uint));
     ret.square_image = cvCreateMatHeader(source->height + 1, source->width + 1, CV_64FC1);
-    cvSetData(ret.square_image, square_result, source->width + 1);
+    cvSetData(ret.square_image, square_result, (source->width + 1) * sizeof(cl_ulong));
     return ret;
 }
 
